@@ -1,0 +1,7 @@
+Django==2.2
+nltk==3.4
+pytz==2019.1
+rake-nltk==1.0.4
+singledispatch==3.4.0.3
+six==1.12.0
+sqlparse==0.3.0
