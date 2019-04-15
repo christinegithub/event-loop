@@ -8,12 +8,8 @@ footer {
   text-align: center;
 }
 
-.nav {
+.site-nav-item {
   display: inline-block;
-}
-
-.top-bar {
-  text-align: left;
 }
 
 .link {
@@ -71,7 +67,7 @@ footer {
   margin-bottom: 100px;
 }
 
-.home {
+.event-map {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 0 auto;
