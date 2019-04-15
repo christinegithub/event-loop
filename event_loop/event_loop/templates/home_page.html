@@ -1,5 +1,7 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% load easy_maps_tags %}
+{% block content %}
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -13,20 +15,6 @@
   </head>
 
   <body>
-    <header class="header-nav">
-      <nav class="top-bar">
-        <h1 class="nav logo">EventLoop</h1>
-        <a href="#" class="nav link home">Home</a>
-        <a href="#" class="nav link">How It Works</a>
-        <a href="#" class="nav link">Log In</a>
-        <a href="#" class="nav link sign-up">Sign Up</a>
-      </nav>
-      
-      <div class="container">
-        <img class="raptors" src="{% static 'img/raptors.jpg' %}" alt="raptors">
-        <div class="sign-up-box">Sign up for free</div>
-      </div>
-    </header>
 
     <main>
       <section class="home">
@@ -49,3 +37,4 @@
     </footer>
   </body>
 </html>
+  {% endblock %}
