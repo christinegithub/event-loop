@@ -47,16 +47,16 @@ footer {
   opacity: 0.8;
   color: white;
   border-radius: 25px;
-  height: 200px;
-  width: 300px;
+  height: 25%;
+  width: 35%;
 }
 
 .container {
-  position: relative;
   text-align: center;
 }
 
 .raptors {
+  position: relative;
   width: 100%;
 }
 
@@ -69,4 +69,10 @@ footer {
 
 .events {
   margin-bottom: 100px;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
 }
