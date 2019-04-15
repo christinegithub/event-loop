@@ -1,7 +1,5 @@
 Django==2.2
 django-appconf==1.0.3
-django-classy-tags==0.8.0
-django-easy-maps==1.0.0
 geographiclib==1.49
 geopy==1.19.0
 nltk==3.4

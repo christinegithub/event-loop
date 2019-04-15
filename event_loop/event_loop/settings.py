@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-EASY_MAPS_GOOGLE_KEY = os.environ.get("EASY_MAPS_GOOGLE_KEY")
+GOOGLE_MAPS_KEY = os.environ.get("GOOGLE_MAPS_KEY")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'event_loop',
-    'easy_maps',
 ]
 
 MIDDLEWARE = [

@@ -1,35 +1,30 @@
 <!DOCTYPE html>
-
-{% load staticfiles %}
 <html lang="en" dir="ltr">
   <head>
+    {% load staticfiles %}
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static 'css/blog_main.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>EventLoop</title>
   </head>
   <body>
-    <header class="header-nav">
-      <nav class="top-bar">
-        <h1 class="nav logo">EventLoop</h1>
-        <a href="#" class="nav link home">Home</a>
-        <a href="#" class="nav link">How It Works</a>
-        <a href="#" class="nav link">Log In</a>
-        <a href="#" class="nav link sign-up">Sign Up</a>
+    <header class="site-header">
+      <h1 class="site-logo">EventLoop</h1>
+      <nav class="site-nav">
+        <ul class="site-nav-list">
+          <li class="site-nav-item"><a href="#">Home</a></li>
+          <li class="site-nav-item"><a href="#">How It Works</a></li>
+          <li class="site-nav-item"><a href="#">Log In</a></li>
+          <li class="site-nav-item"><a href="#">Sign Up</a></li>
+        </ul>
       </nav>
-
       <div class="container">
         <img class="raptors" src="{% static 'img/raptors.jpg' %}" alt="raptors">
         <div class="sign-up-box">Sign up for free</div>
       </div>
     </header>
-
-
     {% block content %}
     {% endblock %}
-
+    <footer class="main-footer">Created by Team _____ &copy 2019</footer>
   </body>
-  <footer class="main-footer">&copy Christine L.</footer>
-
-
 </html>
