@@ -20,4 +20,5 @@ from event_loop import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home_page),
+    path('events/<int:id>/', views.event_show, name='event_show'),
 ]
