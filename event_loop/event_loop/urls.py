@@ -20,4 +20,6 @@ from event_loop import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home_page),
+    path('login/', views.login_view, name="login"),
+    path('signup/', views.signup, name="signup"),
 ]
