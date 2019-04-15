@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.conf import settings
 
 from event_loop.models import Location, Event, Keyword, Profile
 

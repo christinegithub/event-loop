@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load easy_maps_tags %}
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -10,9 +11,9 @@
     <title>Event Loop</title>
 
   </head>
-  <body>
-    <div class="header-nav">
 
+  <body>
+    <header class="header-nav">
       <nav class="top-bar">
         <h1 class="nav logo">EventLoop</h1>
         <a href="#" class="nav link home">Home</a>
@@ -20,23 +21,28 @@
         <a href="#" class="nav link">Log In</a>
         <a href="#" class="nav link sign-up">Sign Up</a>
       </nav>
-    </div>
+      
+      <div class="container">
+        <img class="raptors" src="{% static 'img/raptors.jpg' %}" alt="raptors">
+        <div class="sign-up-box">Sign up for free</div>
+      </div>
+    </header>
 
+    <main>
+      <section class="home">
+        <div class="events">
+          <ul>
+            <li class="event">Event# 1</li>
+            <li class="event">Event# 2</li>
+            <li class="event">Event #3</li>
+          </ul>
+        </div>
 
-
-    <div class="container">
-      <img class="raptors" src="{% static 'img/raptors.jpg' %}" alt="raptors">
-      <div class="sign-up-box">Sign up for free</div>
-
-    </div>
-
-    <div class="events">
-      <ul>
-        <li class="event">Event# 1</li>
-        <li class="event">Event# 2</li>
-        <li class="event">Event #3</li>
-      </ul>
-    </div>
+        <div class="map">
+          {% easy_map "Canada, Toronto, 220 King Street West" "100%" 400 using "easy_maps/map.html" %}
+        </div>
+      </section>
+    </main>
 
     <footer>
       Created by Team _____   Copyright 2019
