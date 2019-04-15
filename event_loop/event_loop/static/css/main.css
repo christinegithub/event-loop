@@ -1,0 +1,72 @@
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.nav {
+  display: inline-block;
+}
+
+.top-bar {
+  text-align: left;
+}
+
+.link {
+  padding: 10px 5px 0px 5px;
+  margin: 5px;
+  text-align: right;
+}
+
+.logo {
+  right: 5px;
+  text-align: left;
+}
+
+.home {
+  margin-left: 900px;
+}
+
+.sign-up {
+  background: #59c3c3;
+  color: white;
+  border-radius: 25px;
+  padding-bottom: 10px;
+}
+
+.sign-up-box {
+  padding: 50px;
+  position: absolute;
+  bottom: 200px;
+  right: 50px;
+  background: #59c3c3;
+  opacity: 0.8;
+  color: white;
+  border-radius: 25px;
+  height: 200px;
+  width: 300px;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+}
+
+.raptors {
+  width: 100%;
+}
+
+.event {
+  border: gray solid 2px;
+  padding: 10px;
+  margin-bottom: 50px;
+  width: 40%;
+}
+
+.events {
+  margin-bottom: 100px;
+}
