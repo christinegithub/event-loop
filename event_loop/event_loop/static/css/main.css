@@ -116,4 +116,8 @@ footer {
 
 .site-nav-item {
   padding: 0px 5px;
+
+#map {
+  height: 400px;
+  width: 100%;
 }

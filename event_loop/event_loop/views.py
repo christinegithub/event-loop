@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 import json
 import requests
+import os
 
 from event_loop.models import Location, Event, Keyword, Profile
 
@@ -19,6 +20,8 @@ def home_page(request):
     event_response = requests.get(f"https://www.blogto.com/api/v2/events/?bundle_type={bundle_type}&date={date}&limit={limit}&offset={offset}&status={status}")
 
     event_body = json.loads(event_response.content)
+
+    GOOGLE_MAPS_KEY = os.environ.get("GOOGLE_MAPS_KEY")
 
     for event in event_body["results"]:
         each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
@@ -37,7 +40,7 @@ def home_page(request):
             blogto_id = event["id"])
 
     events = Event.objects.all()
-    context = {'events': events}
+    context = {'events': events, 'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY}
     response = render(request, 'home_page.html', context)
     return HttpResponse(response)
 
@@ -55,6 +58,7 @@ def signup(request):
             return HttpResponseRedirect('/home/')
     else:
         form = UserCreationForm()
+
     response = render(request, 'signup.html', {'form': form})
     return HttpResponse(response)
 
@@ -75,9 +79,12 @@ def login_view(request):
     else:
         form = LoginForm()
 
-    form = LoginForm()
     response = render(request, 'login.html', {'form': form})
     return HttpResponse(response)
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/home/')
 
 def event_show(request, id):
     event = Event.objects.get(pk=id)
