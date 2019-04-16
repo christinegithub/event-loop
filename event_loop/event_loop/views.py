@@ -5,9 +5,32 @@ from event_loop.forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 
+import json
+import requests
+
 from event_loop.models import Location, Event, Keyword, Profile
 
 def home_page(request):
+    bundle_type = 'medium'
+    date = '2019-04-11'
+    limit = 9999
+    offset = 0
+    status = 'ongoing'
+    event_response = requests.get(f"https://www.blogto.com/api/v2/events/?bundle_type={bundle_type}&date={date}&limit={limit}&offset={offset}&status={status}")
+
+    event_body = json.loads(event_response.content)
+
+    for event in event_body["results"]:
+        # each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
+        # each_event_body = json.loads(each_event.content)
+        # # print(event["title"])
+        # if each_event_body["location"]:
+        #     event_location = Location.objects.create(address = each_event_body["address"], province = each_event_body["province"], city = each_event_body["city"], longitude = each_event_body["location"]["longitude"], latitude = each_event_body["location"]["latitude"])
+        # else:
+        #     event_location = None
+        new_event = Event.objects.create(title = event["title"], description = event["description_stripped"], date = date, start_time = event["start_time"], end_time = event["end_time"], blogto_id = event["id"])
+
+
     events = Event.objects.all()
     context = {'events': events}
     response = render(request, 'home_page.html', context)
@@ -44,7 +67,7 @@ def login_view(request):
                 return HttpResponseRedirect('/home/')
             else:
                 form.add_error('username', 'Login failed.')
-    else: 
+    else:
         form = LoginForm()
 
     form = LoginForm()
