@@ -50,6 +50,7 @@ def signup(request):
             return HttpResponseRedirect('/home/')
     else:
         form = UserCreationForm()
+
     response = render(request, 'signup.html', {'form': form})
     return HttpResponse(response)
 
@@ -70,9 +71,12 @@ def login_view(request):
     else:
         form = LoginForm()
 
-    form = LoginForm()
     response = render(request, 'login.html', {'form': form})
     return HttpResponse(response)
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/home/')
 
 def event_show(request, id):
     event = Event.objects.get(pk=id)
