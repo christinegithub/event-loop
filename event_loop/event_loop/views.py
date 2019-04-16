@@ -21,15 +21,20 @@ def home_page(request):
     event_body = json.loads(event_response.content)
 
     for event in event_body["results"]:
-        # each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
+        each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
         # each_event_body = json.loads(each_event.content)
         # # print(event["title"])
         # if each_event_body["location"]:
         #     event_location = Location.objects.create(address = each_event_body["address"], province = each_event_body["province"], city = each_event_body["city"], longitude = each_event_body["location"]["longitude"], latitude = each_event_body["location"]["latitude"])
         # else:
         #     event_location = None
-        new_event = Event.objects.create(title = event["title"], description = event["description_stripped"], date = date, start_time = event["start_time"], end_time = event["end_time"], blogto_id = event["id"])
-
+        new_event = Event.objects.create(
+            title = event["title"],
+            description = event["description_stripped"],
+            date = date,
+            start_time = event["start_time"],
+            end_time = event["end_time"],
+            blogto_id = event["id"])
 
     events = Event.objects.all()
     context = {'events': events}
@@ -78,4 +83,3 @@ def event_show(request, id):
     event = Event.objects.get(pk=id)
     context = {'event': event, 'title':  event.title}
     return render(request, 'event_details.html', context)
-
