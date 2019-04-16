@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block content %}
 <main class="">
+
+  <div class="container">
+    <div class="main-image">
+      <img class="raptors" src="{% static 'img/raptors.jpg' %}" alt="raptors">
+    </div>
+    <div class="sign-up-box">Sign up for free</div>
+  </div>
+
   <section class="event-map">
     <div class="events">
-      <ul>
+      <h3>What's happening today?</h3>
+      <ol class="events-list">
 
         {% for event in events %}
-          <li>{{ event.title }} | Start Time: {{ event.start_time }} | End Time: {{ event.end_time }}</li>
+          <li class="each-event">{{ event.title }} | Start Time: {{ event.start_time }} | End Time: {{ event.end_time }}
+            <p>{{ event.description | truncatechars:200 }} <a href="#">See Details</a></p>
 
+          </li>
         {% endfor %}
 
-      </ul>
+      </ol>
     </div>
     <div id="map">
     </div>
