@@ -1,20 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
+
+{% load staticfiles %}
+
 <main class="">
   <section class="event-map">
-    <div class="events">
-      <ul>
 
-        {% for event in events %}
-          <li>{{ event.title }} | Start Time: {{ event.start_time }} | End Time: {{ event.end_time }}</li>
-
-        {% endfor %}
-
-      </ul>
+    <div class="container">
+      <img class="raptors" src="{% static 'img/raptors.jpg' %}" alt="raptors">
+      <div class="sign-up-box">Sign up for free</div>
     </div>
-    <div id="map">
-      <h3>Map goes here!</h3>
-    </div>
+
   </section>
 </main>
+
 {% endblock %}

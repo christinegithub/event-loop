@@ -11,8 +11,11 @@ import requests
 from event_loop.models import Location, Event, Keyword, Profile
 
 def home_page(request):
+    return render(request, 'home_page.html', {})
+
+def events(request):
     bundle_type = 'medium'
-    date = '2019-04-11'
+    date = '2019-04-17'
     limit = 9999
     offset = 0
     status = 'ongoing'
@@ -28,13 +31,17 @@ def home_page(request):
         #     event_location = Location.objects.create(address = each_event_body["address"], province = each_event_body["province"], city = each_event_body["city"], longitude = each_event_body["location"]["longitude"], latitude = each_event_body["location"]["latitude"])
         # else:
         #     event_location = None
-        new_event = Event.objects.create(title = event["title"], description = event["description_stripped"], date = date, start_time = event["start_time"], end_time = event["end_time"], blogto_id = event["id"])
+        new_event = Event.objects.get_or_create(
+            title = event["title"],
+            description = event["description_stripped"],
+            date = date,
+            image_url = event["image_url"] + "?width=120&height=120",
+            start_time = event["start_time"],
+            end_time = event["end_time"],
+            blogto_id = event["id"]
+        )
+    return render(request, 'events.html', {'events': Event.objects.all().order_by("id").reverse() })
 
-
-    events = Event.objects.all()
-    context = {'events': events}
-    response = render(request, 'home_page.html', context)
-    return HttpResponse(response)
 
 def signup(request):
     if request.user.is_authenticated:
@@ -79,3 +86,8 @@ def event_show(request, id):
     context = {'event': event, 'title':  event.title}
     return render(request, 'event_details.html', context)
 
+#
+# def location_show(request, id):
+#     location = Location.objects.get(pk=id)
+#     context = {'location': location, 'title':  event.title}
+#     return render(request, 'event_details.html', context)
