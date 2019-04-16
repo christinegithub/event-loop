@@ -1,10 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 from event_loop.forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-
 from event_loop.models import Location, Event, Keyword, Profile
 
 def home_page(request):
@@ -44,9 +43,14 @@ def login_view(request):
                 return HttpResponseRedirect('/home/')
             else:
                 form.add_error('username', 'Login failed.')
-    else: 
+    else:
         form = LoginForm()
 
     form = LoginForm()
     response = render(request, 'login.html', {'form': form})
     return HttpResponse(response)
+
+def event_show(request, id):
+    event = Event.objects.get(pk=id)
+    context = {'event': event, 'title':  event.title}
+    return render(request, 'event_details.html', context)
