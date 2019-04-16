@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 import json
 import requests
+import os
 
 from event_loop.models import Location, Event, Keyword, Profile
 
@@ -20,6 +21,8 @@ def home_page(request):
 
     event_body = json.loads(event_response.content)
 
+    GOOGLE_MAPS_KEY = os.environ.get("GOOGLE_MAPS_KEY")
+
     for event in event_body["results"]:
         # each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
         # each_event_body = json.loads(each_event.content)
@@ -32,7 +35,7 @@ def home_page(request):
 
 
     events = Event.objects.all()
-    context = {'events': events}
+    context = {'events': events, 'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY}
     response = render(request, 'home_page.html', context)
     return HttpResponse(response)
 
@@ -82,4 +85,3 @@ def event_show(request, id):
     event = Event.objects.get(pk=id)
     context = {'event': event, 'title':  event.title}
     return render(request, 'event_details.html', context)
-
