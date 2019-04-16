@@ -4,9 +4,12 @@
   <section class="event-map">
     <div class="events">
       <ul>
-        <li class="event">Event #1</li>
-        <li class="event">Event #2</li>
-        <li class="event">Event #3</li>
+
+        {% for event in events %}
+          <li>{{ event.title }} | Start Time: {{ event.start_time }} | End Time: {{ event.end_time }}</li>
+
+        {% endfor %}
+
       </ul>
     </div>
     <div id="map">
