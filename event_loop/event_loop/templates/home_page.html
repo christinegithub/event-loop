@@ -1,40 +1,17 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
-{% load easy_maps_tags %}
 {% block content %}
-
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-    <title>Event Loop</title>
-
-  </head>
-
-  <body>
-
-    <main>
-      <section class="home">
-        <div class="events">
-          <ul>
-            <li class="event">Event# 1</li>
-            <li class="event">Event# 2</li>
-            <li class="event">Event #3</li>
-          </ul>
-        </div>
-
-        <div class="map">
-          {% easy_map "Canada, Toronto, 220 King Street West" "100%" 400 using "easy_maps/map.html" %}
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      Created by Team _____   Copyright 2019
-    </footer>
-  </body>
-</html>
-  {% endblock %}
+<main class="">
+  <section class="event-map">
+    <div class="events">
+      <ul>
+        <li class="event">Event #1</li>
+        <li class="event">Event #2</li>
+        <li class="event">Event #3</li>
+      </ul>
+    </div>
+    <div id="map">
+      <h3>Map goes here!</h3>
+    </div>
+  </section>
+</main>
+{% endblock %}

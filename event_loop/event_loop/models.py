@@ -28,3 +28,4 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     tags = models.ManyToManyField(Keyword, related_name='profiles')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_profile", default=1)
