@@ -11,9 +11,9 @@ import requests
 from event_loop.models import Location, Event, Keyword, Profile
 
 def home_page(request):
-    return render(request, 'home_page.html', {})
+    # return render(request, 'home_page.html', {})
 
-def events(request):
+# def events(request):
     bundle_type = 'medium'
     date = '2019-04-17'
     limit = 9999
@@ -40,7 +40,13 @@ def events(request):
             end_time = event["end_time"],
             blogto_id = event["id"]
         )
-    return render(request, 'events.html', {'events': Event.objects.all().order_by("id").reverse() })
+    # return render(request, 'events.html', {'events': Event.objects.all().order_by("id").reverse() })
+
+        events = Event.objects.all().order_by("id").reverse()
+        context = {'events': events}
+        response = render(request, 'home_page.html', context)
+        return HttpResponse(response)
+
 
 
 def signup(request):
