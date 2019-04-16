@@ -19,10 +19,28 @@
         </ul>
       </nav>
     </header>
+    <main class="">
+      <section class="event-map">
+        <div class="events">
+          <ul>
+
+            {% for event in events %}
+              <li>{{ event.id }} - {{ event.title }} | Start Time: {{ event.start_time }} | End Time: {{ event.end_time }}</li>
+              <a href="{% url 'event_show' id=event.pk %}"> More Details </a>
+
+            {% endfor %}
+
+          </ul>
+        </div>
+        <div id="map">
+          <h3>Map goes here!</h3>
+        </div>
+      </section>
+    </main>
 
     {% block content %}
     {% endblock %}
-    
+
     <footer class="main-footer">Created by Team _____ &copy 2019</footer>
   </body>
 </html>
