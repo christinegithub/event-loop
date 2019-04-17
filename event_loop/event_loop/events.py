@@ -3,7 +3,7 @@ import requests
 
 
 bundle_type = 'medium'
-date = '2019-04-11'
+date = '2019-04-16'
 limit = 9999
 offset = 0
 status = 'ongoing'
