@@ -30,4 +30,9 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     tags = models.ManyToManyField(Keyword, related_name='profiles')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_profile", default=1)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
+
+    @classmethod
+    def exists_for_user(self, user):
+        return Profile.objects.filter(user_id=user.id).exists()
+

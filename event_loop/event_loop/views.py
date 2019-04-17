@@ -1,9 +1,11 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.conf import settings
-from event_loop.forms import LoginForm
+from event_loop.forms import LoginForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 
 import json
 import requests
@@ -56,12 +58,36 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return HttpResponseRedirect('/home/')
+            return redirect(reverse('profile'))
     else:
         form = UserCreationForm()
 
     response = render(request, 'signup.html', {'form': form})
     return HttpResponse(response)
+
+@login_required
+def profile(request):
+    context = {'title': 'Profile'}
+    if not Profile.exists_for_user(request.user):
+        form = ProfileForm()
+        context['form'] = form
+    response = render(request, 'profile.html', context)
+    return HttpResponse(response)
+
+
+@login_required
+def profile_create(request):
+    form = ProfileForm(request.POST)
+    form.instance.user = request.user
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/profile/')
+    else:
+        context = {'title': 'Profile', 'form': form}
+        response = render(request, 'profile.html', context)
+        return HttpResponse(response)
+
+    
 
 def login_view(request):
     if request.user.is_authenticated:
