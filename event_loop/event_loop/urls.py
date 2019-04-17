@@ -19,9 +19,14 @@ from event_loop import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('home/', views.home_page),
     # path('events/', views.events, name='events'),
+=======
+    path('home/', views.home_page, name='home'),
+>>>>>>> 1c9316cfc034db8bbaa429d8b3672bc0cb6530e1
     path('events/<int:id>/', views.event_show, name='event_show'),
     path('login/', views.login_view, name="login"),
     path('signup/', views.signup, name="signup"),
+    path('logout/', views.logout_view, name='logout'),
 ]
