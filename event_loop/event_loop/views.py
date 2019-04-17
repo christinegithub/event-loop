@@ -11,10 +11,13 @@ import os
 
 from event_loop.models import Location, Event, Keyword, Profile
 
+def root(request):
+    return HttpResponseRedirect('/home')
+
 def home_page(request):
 
     bundle_type = 'medium'
-    date = '2019-04-17'
+    date = '2019-04-18'
     limit = 9999
     offset = 0
     status = 'ongoing'
@@ -31,8 +34,9 @@ def home_page(request):
                 title = event["title"],
                 description = event["description_stripped"],
                 date = date,
-                image_url = event["image_url"] + "?width=120&height=120",
+                image_url = event["image_url"] + "?width=600&height=600",
                 start_time = event["start_time"],
+                # venue = event["venue_name"],
                 end_time = event["end_time"],
                 blogto_id = event["id"])
         except Event.MultipleObjectsReturned:
