@@ -93,12 +93,3 @@ def event_show(request, id):
     event = Event.objects.get(pk=id)
     context = {'event': event, 'title':  event.title}
     return render(request, 'event_details.html', context)
-<<<<<<< HEAD
-
-#
-# def location_show(request, id):
-#     location = Location.objects.get(pk=id)
-#     context = {'location': location, 'title':  event.title}
-#     return render(request, 'event_details.html', context)
-=======
->>>>>>> 1c9316cfc034db8bbaa429d8b3672bc0cb6530e1
