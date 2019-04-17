@@ -17,6 +17,34 @@ from django.contrib import admin
 from django.urls import path
 from event_loop import views
 
+from django.conf.urls import url, include
+from event_loop.models import Event
+from rest_framework import serializers, viewsets, routers
+
+
+# Serializers define the API representation.
+class EventSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Event
+        fields = ('id', 'title', 'description', 'date')
+
+
+# ViewSets define the view behavior.
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
+
+# Routers provide a way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'events', EventViewSet)
+
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = [
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.root),
@@ -27,4 +55,6 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('profile/', views.profile, name='profile'),
     path('profiles/create', views.profile_create, name="profile_create"),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
