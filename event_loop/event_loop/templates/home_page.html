@@ -17,7 +17,8 @@
 
         {% for event in events %}
           <li class="each-event">{{ event.title }} | Start Time: {{ event.start_time }} | End Time: {{ event.end_time }}
-            <p>{{ event.description | truncatechars:200 }} <a href="#">See Details</a></p>
+            <p>{{ event.description | truncatechars:200 }}</p>
+            <p><a href="{% url 'event_show' id=event.pk %}"> See Details</a></p>
 
           </li>
         {% endfor %}
