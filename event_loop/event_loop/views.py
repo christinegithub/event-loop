@@ -38,7 +38,7 @@ def home_page(request):
         except Event.MultipleObjectsReturned:
             print("Duplicate event Id: " + str(event["id"]))
 
-    events = Event.objects.all()
+    events = Event.objects.all().order_by("id").reverse()
     context = {'events': events, 'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY}
     response = render(request, 'home_page.html', context)
     return HttpResponse(response)
