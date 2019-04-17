@@ -28,7 +28,7 @@ def home_page(request):
     GOOGLE_MAPS_KEY = os.environ.get("GOOGLE_MAPS_KEY")
 
     for event in event_body["results"]:
-        each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
+        # each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
         try:
             Event.objects.get_or_create(
                 title = event["title"],
