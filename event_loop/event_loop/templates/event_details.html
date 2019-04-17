@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
 <main class='events_details'>
-  <h2>{{ event.title }}</h2>
-  <p>Opens: {{ event.start_time }}</p>
-  <p>Closes: {{ event.end_time }} </p>
-  <p> {{ event.location }} </p>
+
+  <h2>Event Details:</h2>
+  <h3>{{ event.id }} - {{ event.title }}</h3>
+  <p><b>Date:</b> {{event.date}}</p>
+  <p><b>Opens:</b> {{ event.start_time }}</p>
+  <p><b>Closes:</b> {{ event.end_time }} </p>
+  <p><b>Location:</b> {{ event.location }} </p>
 
 <img src="{{ event.image_url }}"></img>
-  <p> {{ event.description }} </p>
-  <!-- <img class='restaurant-image' src="{{ restaurant.image }}"> -->
 
+  <p><b>Venue:</b> {{event.Venue}}</p>
+  <p><b>Address:</b> {{event.address}}</p>
+  <p><b>Description:</b> {{ event.description }} </p>
+  <p><b>URl:</b> {{event.event_url}}</p>
 </main>
+
+
 
 {% endblock %}

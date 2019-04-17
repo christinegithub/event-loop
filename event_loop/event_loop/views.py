@@ -9,12 +9,14 @@ from django.views.decorators.http import require_http_methods
 
 import json
 import requests
+import os
 
 from event_loop.models import Location, Event, Keyword, Profile
 
 def home_page(request):
+
     bundle_type = 'medium'
-    date = '2019-04-11'
+    date = '2019-04-17'
     limit = 9999
     offset = 0
     status = 'ongoing'
@@ -22,21 +24,28 @@ def home_page(request):
 
     event_body = json.loads(event_response.content)
 
+    GOOGLE_MAPS_KEY = os.environ.get("GOOGLE_MAPS_KEY")
+
     for event in event_body["results"]:
         each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
-        each_event_body = json.loads(each_event.content)
-        # print(event["title"])
-        if each_event_body["location"]:
-            event_location = Location.objects.create(address = each_event_body["address"], province = each_event_body["province"], city = each_event_body["city"], longitude = each_event_body["location"]["longitude"], latitude = each_event_body["location"]["latitude"])
-        else:
-            event_location = None
-        new_event = Event.objects.create(title = event["title"], description = event["description_stripped"], date = date, start_time = event["start_time"], end_time = event["end_time"], blogto_id = event["id"])
+        try:
+            Event.objects.get_or_create(
+                title = event["title"],
+                description = event["description_stripped"],
+                date = date,
+                image_url = event["image_url"] + "?width=120&height=120",
+                start_time = event["start_time"],
+                end_time = event["end_time"],
+                blogto_id = event["id"])
+        except Event.MultipleObjectsReturned:
+            print("Duplicate event Id: " + str(event["id"]))
 
-
-    events = Event.objects.all()
-    context = {'events': events}
+    events = Event.objects.all().order_by("id").reverse()
+    context = {'events': events, 'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY}
     response = render(request, 'home_page.html', context)
     return HttpResponse(response)
+
+
 
 def signup(request):
     if request.user.is_authenticated:
@@ -108,4 +117,3 @@ def event_show(request, id):
     event = Event.objects.get(pk=id)
     context = {'event': event, 'title':  event.title}
     return render(request, 'event_details.html', context)
-
