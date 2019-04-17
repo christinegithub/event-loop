@@ -21,6 +21,13 @@ from django.conf.urls import url, include
 from event_loop.models import Event
 from rest_framework import serializers, viewsets, routers
 
+from django.contrib import admin
+from django.views.generic import TemplateView
+from django.urls import path
+
+urlpatterns = [
+]
+
 
 # Serializers define the API representation.
 class EventSerializer(serializers.HyperlinkedModelSerializer):
@@ -42,12 +49,12 @@ router.register(r'events', EventViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
-urlpatterns = [
-]
 
+#path('admin/', admin.site.urls),
+#path('', views.root),
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.root),
+    path('', TemplateView.as_view(template_name='frontend/index.html')),
     path('home/', views.home_page, name='home'),
     path('events/<int:id>/', views.event_show, name='event_show'),
     path('login/', views.login_view, name="login"),

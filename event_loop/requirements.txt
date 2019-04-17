@@ -8,3 +8,4 @@ rake-nltk==1.0.4
 singledispatch==3.4.0.3
 six==1.12.0
 sqlparse==0.3.0
+django-webpack-loader==0.6.0
