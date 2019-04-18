@@ -25,7 +25,7 @@ def home_page(request):
     GOOGLE_MAPS_KEY = os.environ.get("GOOGLE_MAPS_KEY")
 
     for event in event_body["results"]:
-        each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
+        # each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
         try:
             Event.objects.get_or_create(
                 title = event["title"],
@@ -34,7 +34,8 @@ def home_page(request):
                 image_url = event["image_url"] + "?width=120&height=120",
                 start_time = event["start_time"],
                 end_time = event["end_time"],
-                blogto_id = event["id"])
+                blogto_id = event["id"],
+                venue_name = event["venue_name"])
         except Event.MultipleObjectsReturned:
             print("Duplicate event Id: " + str(event["id"]))
 
