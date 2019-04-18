@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
+<div class='details'>
 <main class='events_details'>
 
   <h2>Event Details:</h2>
@@ -13,12 +13,12 @@
 
 <img src="{{ event.image_url }}"></img>
 
-  <p><b>Venue:</b> {{event.Venue}}</p>
+  <!-- <p><b>Venue:</b> {{event.venue}}</p> -->
   <p><b>Address:</b> {{event.address}}</p>
   <p><b>Description:</b> {{ event.description }} </p>
   <p><b>URl:</b> {{event.event_url}}</p>
 </main>
-
+</div>
 
 
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
+
 <main class="">
 
   <div class="container">
@@ -10,10 +11,13 @@
     <div class="sign-up-box">Sign up for free</div>
   </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
   <section class="event-map">
     <div class="events">
       <h3>What's happening today?</h3>
-      <ol class="events-list">
+      <ol class="events-list" id="infinite-list">
 
         {% for event in events %}
           <li class="each-event">{{ event.title }} | Start Time: {{ event.start_time }} | End Time: {{ event.end_time }}
@@ -25,6 +29,30 @@
         {% endfor %}
 
       </ol>
+      <ul class="pagination"></ul>
+
+
+      <div class="pagination">
+        <span class="step-links">
+        {% if events.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ events.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ events.number }} of {{ events.paginator.num_pages }}.
+        </span>
+
+        {% if events.has_next %}
+            <a href="?page={{ events.next_page_number }}">next</a>
+            <a href="?page={{ events.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+        </span>
+
+
+      </div>
+
+
     </div>
     <div id="map">
     </div>
