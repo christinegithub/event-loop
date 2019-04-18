@@ -62,7 +62,8 @@ def home_page(request):
                 start_time = event["start_time"],
                 # venue = event["venue_name"],
                 end_time = event["end_time"],
-                blogto_id = event["id"])
+                blogto_id = event["id"],
+                venue_name = event["venue_name"])
         except Event.MultipleObjectsReturned:
             print("Duplicate event Id: " + str(event["id"]))
 

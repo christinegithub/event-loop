@@ -19,7 +19,7 @@ class Event(models.Model):
     is_multiple_days = models.BooleanField(null=True)
     event_url = models.URLField(max_length=255, null=True)
     blogto_id = models.IntegerField()
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='events', null=True)
+    venue_name = models.CharField(max_length=255)
 
 class Keyword(models.Model):
     word = models.CharField(max_length=255, unique=True)

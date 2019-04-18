@@ -22,7 +22,8 @@
         {% for event in events %}
           <li class="each-event">{{ event.title }} | Start Time: {{ event.start_time }} | End Time: {{ event.end_time }}
             <p>{{ event.description | truncatechars:200 }}</p>
-            <p><a href="{% url 'event_show' id=event.pk %}"> See Details</a></p>
+            <p class="venue-name">Venue: {{ event.venue_name }}</p>
+            <p><a href="{% url 'event_show' id=event.pk %}">See Details</a></p>
 
           </li>
         {% endfor %}
@@ -57,8 +58,5 @@
     </div>
   </section>
 </main>
-<script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_MAPS_KEY}}&callback=initMap" async defer></script>
-
-
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_MAPS_KEY}}&callback=initHomeMap" async defer></script>
 {% endblock %}
