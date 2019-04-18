@@ -18,6 +18,10 @@ from django.urls import path
 from event_loop import views
 
 urlpatterns = [
+
+    path('api/', views.ListEvent.as_view()),
+    path('api/<int:pk>/', views.DetailEvent.as_view()),
+
     path('admin/', admin.site.urls),
     path('', views.root),
     path('home/', views.home_page, name='home'),
