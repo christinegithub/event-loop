@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <main>
+        <h1>{{ request.user.username }}</h1>
+        {% if form %}
+            <section>
+                <form action="{% url 'profile_create' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+        {% else %}
+            <section>
+                <h2>Interests</h2>
+                <ul>
+                    <li>Interest 1</li>
+                    <li>Interest 2</li>
+                    <li>Interest 3</li>
+                </ul>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}
