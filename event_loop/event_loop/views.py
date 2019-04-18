@@ -19,10 +19,21 @@ import json
 import requests
 import os
 
+from rest_framework import generics
+
 from event_loop.models import Location, Event, Keyword, Profile
+from event_loop.serializers import EventSerializer
 
 def root(request):
     return HttpResponseRedirect('/home')
+
+class ListEvent(generics.ListCreateAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
+class DetailEvent(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 
 def home_page(request):
 
@@ -130,7 +141,7 @@ def profile_create(request):
         response = render(request, 'profile.html', context)
         return HttpResponse(response)
 
-    
+
 
 def login_view(request):
     if request.user.is_authenticated:
