@@ -40,16 +40,24 @@ class EventsList extends Component {
   render() {
     return (
       <div>
+        <h3>What's happening today?</h3>
+        <ol class="events-list">
+
         {this.state.events.map(event => (
-          <div key={event.id}>
-          <h1>{event.title}</h1>
-          <p>{truncateString(event.description, 200)}</p>
-          <p>Date: {event.date}</p>
-          <p>Start Time: {event.start_time}</p>
-          <p>End Time: {event.end_time}</p>
-          <p><a href="{% url 'event_show' id=event.pk %}"> See Details</a></p>
-          </div>
+
+          <li class="each-event">
+            <div key={event.id}>
+            <h1>{event.title}</h1>
+            <p>{truncateString(event.description, 200)}</p>
+            <p>Date: {event.date}</p>
+            <p>Start Time: {event.start_time}</p>
+            <p>End Time: {event.end_time}</p>
+            <p><a href="{% url 'event_show' id=event.pk %}"> See Details</a></p>
+            </div>
+          </li>
         ))}
+        </ol>
+
       </div>
     );
   }

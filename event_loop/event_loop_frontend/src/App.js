@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import EventsMap from './EventsMap';
 import EventsList from './EventsList';

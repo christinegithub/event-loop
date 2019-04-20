@@ -31,3 +31,22 @@
     transform: rotate(360deg);
   }
 }
+
+.events-list {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 600px;
+  width: 90%;
+}
+
+.each-event:hover {
+  background: #ccccd6;
+}
+
+.each-event {
+  margin-top: 10px;
+}
+
+.each-event:first-child {
+  margin-top: 0px;
+}
