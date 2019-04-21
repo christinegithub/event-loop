@@ -40,7 +40,7 @@ function Home({ match }) {
       <h2>Events</h2>
       <ul>
         <li>
-          <Link to={`events/123707`}>Event #1</Link>
+          <Link to={`events/134280`}>Event #1</Link>
         </li>
       </ul>
       <EventsMap />
@@ -48,7 +48,7 @@ function Home({ match }) {
       <Route
         exact
         path={match.path}
-        render={() => <h3>Please select an event.</h3>}
+        render={() => <h3>Please select a event.</h3>}
       />
     </div>
   );
