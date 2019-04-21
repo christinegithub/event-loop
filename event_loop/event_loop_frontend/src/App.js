@@ -36,7 +36,7 @@ function About() {
 function Home({ match }) {
   return (
     <div>
-      <h2>Topics</h2>
+      <h2>Events</h2>
       <ul>
         <li>
           <Link to={`events/134280`}>Event #1</Link>
@@ -46,7 +46,7 @@ function Home({ match }) {
       <Route
         exact
         path={match.path}
-        render={() => <h3>Please select a topic.</h3>}
+        render={() => <h3>Please select a event.</h3>}
       />
     </div>
   );
