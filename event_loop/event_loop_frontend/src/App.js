@@ -39,7 +39,7 @@ function Home({ match }) {
       <h2>Topics</h2>
       <ul>
         <li>
-          <Link to={`events/123707`}>Event #1</Link>
+          <Link to={`events/134280`}>Event #1</Link>
         </li>
       </ul>
 
