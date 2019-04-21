@@ -1,6 +1,7 @@
 import React from "react";
 import EventDetails from './EventDetails';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import EventsMap from './EventsMap';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function Home({ match }) {
           <Link to={`events/134280`}>Event #1</Link>
         </li>
       </ul>
+      <EventsMap />
 
       <Route
         exact
