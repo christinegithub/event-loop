@@ -51,6 +51,7 @@ function Home({ match }) {
       <EventsList />
       <Pagination />
       <EventsMap />
+      <h2>Filter Events based on your Interests</h2>
       <Autosuggest />
 
       <Route

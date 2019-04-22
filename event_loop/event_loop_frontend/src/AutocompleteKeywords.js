@@ -1,27 +1,22 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import Axios from 'axios';
 
-// Imagine you have a list of interests that you'd like to autosuggest.
-const interests = [
-    {
-        "word": "urbanism",
-        "events": []
-    },
-    {
-        "word": "times",
-        "events": []
-    },
-    {
-        "word": "students",
-        "events": []
-    },
-    {
-        "word": "store",
-        "events": []
-    },
-];
+const interests = [];
 
-// Teach Autosuggest how to calculate suggestions for any given input value.
+const axios = require('axios');
+axios.get('http://localhost:8000/api/keywords')
+    .then(function (response) {
+        console.log(response)
+        for (let i = 0; i < response.data.length; i++) {
+            let new_word = response.data[i].word;
+            interests.push({word: new_word})
+        }
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+
 const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
@@ -31,12 +26,8 @@ const getSuggestions = value => {
   );
 };
 
-// When suggestion is clicked, Autosuggest needs to populate the input
-// based on the clicked suggestion. Teach Autosuggest how to calculate the
-// input value for every given suggestion.
 const getSuggestionValue = suggestion => suggestion.word;
 
-// Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
     {suggestion.word}
@@ -47,11 +38,6 @@ class Example extends React.Component {
   constructor() {
     super();
 
-    // Autosuggest is a controlled component.
-    // This means that you need to provide an input value
-    // and an onChange handler that updates this value (see below).
-    // Suggestions also need to be provided to the Autosuggest,
-    // and they are initially empty because the Autosuggest is closed.
     this.state = {
       value: '',
       suggestions: []
@@ -64,15 +50,12 @@ class Example extends React.Component {
     });
   };
 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       suggestions: getSuggestions(value)
     });
   };
 
-  // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested = () => {
     this.setState({
       suggestions: []
@@ -82,9 +65,8 @@ class Example extends React.Component {
   render() {
     const { value, suggestions } = this.state;
 
-    // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: 'Type a programming language',
+      placeholder: 'Input an interest',
       value,
       onChange: this.onChange
     };
