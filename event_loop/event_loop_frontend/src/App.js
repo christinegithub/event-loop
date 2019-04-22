@@ -5,7 +5,8 @@ import EventsMap from './EventsMap';
 import EventsList from './EventsList';
 import Pagination from './Pagination';
 import EventDetails from './EventDetails';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Autosuggest from './AutocompleteKeywords'
+
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function Home({ match }) {
       <EventsList />
       <Pagination />
       <EventsMap />
+      <Autosuggest />
 
       <Route
         exact
