@@ -37,6 +37,7 @@
   overflow-y: scroll;
   height: 600px;
   width: 90%;
+  border: 2px solid grey;
 }
 
 .each-event:hover {

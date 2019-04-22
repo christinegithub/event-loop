@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import ReactPaginate from "react-paginate";
 
 
 function truncateString(str, num) {
@@ -19,11 +18,6 @@ class EventsList extends Component {
     };
   }
 
-
-  handlePageChange(pageNumber) {
-    console.log(`active page is $(pageNumber)`);
-    this.setState({activePage: pageNumber});
-  }
 
   async componentDidMount() {
     try {
@@ -57,6 +51,7 @@ class EventsList extends Component {
           </li>
         ))}
         </ol>
+        <ul class="pagination"></ul>
 
       </div>
     );
