@@ -1,7 +1,11 @@
 import React from "react";
-import EventDetails from './EventDetails';
+import styles from './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import EventsMap from './EventsMap';
+import EventsList from './EventsList';
+import Pagination from './Pagination';
+import EventDetails from './EventDetails';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -43,12 +47,16 @@ function Home({ match }) {
           <Link to={`events/134280`}>Event #1</Link>
         </li>
       </ul>
+      <EventsList />
+      <Pagination />
       <EventsMap />
 
       <Route
         exact
         path={match.path}
+
         render={() => <h3>Please select a event.</h3>}
+
       />
     </div>
   );
