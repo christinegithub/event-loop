@@ -5,7 +5,6 @@ import EventsMap from './EventsMap';
 import EventsList from './EventsList';
 import Pagination from './Pagination';
 import EventDetails from './EventDetails';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -42,15 +41,9 @@ function Home({ match }) {
   return (
     <div>
       <h2>Events</h2>
-      <ul>
-        <li>
-          <Link to={`events/134280`}>Event #1</Link>
-        </li>
-      </ul>
       <EventsList />
       <Pagination />
       <EventsMap />
-
       <Route
         exact
         path={match.path}
