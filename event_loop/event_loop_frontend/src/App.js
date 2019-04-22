@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import EventsMap from './EventsMap';
 import EventsList from './EventsList';
 import Pagination from './Pagination';
+import EventDetails from './EventDetails';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -22,17 +24,9 @@ function App() {
 
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
-        <Route path="/events/:id" component={Event} />
+        <Route path="/events/:id" component={EventDetails} />
       </div>
     </Router>
-  );
-}
-
-function Event({ match }) {
-  return (
-    <div>
-      <h3>Event: {match.params.id}</h3>
-    </div>
   );
 }
 
@@ -50,7 +44,7 @@ function Home({ match }) {
       <h2>Events</h2>
       <ul>
         <li>
-          <Link to={`events/1`}>Event #1</Link>
+          <Link to={`events/134280`}>Event #1</Link>
         </li>
       </ul>
       <EventsList />
@@ -60,7 +54,9 @@ function Home({ match }) {
       <Route
         exact
         path={match.path}
-        render={() => <h3>Please select an event.</h3>}
+
+        render={() => <h3>Please select a event.</h3>}
+
       />
     </div>
   );
