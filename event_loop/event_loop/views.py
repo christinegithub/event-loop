@@ -22,7 +22,9 @@ import os
 from rest_framework import generics
 
 from event_loop.models import Location, Event, Keyword, Profile
-from event_loop.serializers import EventSerializer
+from event_loop.serializers import EventSerializer, KeywordSerializer
+from rake_nltk import Rake
+
 
 def root(request):
     return HttpResponseRedirect('/home')
@@ -34,6 +36,10 @@ class ListEvent(generics.ListCreateAPIView):
 class DetailEvent(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+class ListKeyword(generics.ListCreateAPIView):
+    queryset = Keyword.objects.all()
+    serializer_class = KeywordSerializer
 
 def home_page(request):
 
@@ -77,6 +83,22 @@ def home_page(request):
                 venue_name = event["venue_name"])
         except Event.MultipleObjectsReturned:
             print("Duplicate event Id: " + str(event["id"]))
+
+    # looping through events, creating a list of keywords, looping through keywords to create keyword object for each
+    # only if word has not been previously created
+    r = Rake(min_length=1, max_length=1)
+
+    for event in event_body["results"]:
+        r.extract_keywords_from_text(event["description_stripped"])
+        word_list = r.get_ranked_phrases()
+    
+        for word in word_list:
+            try:
+                Keyword.objects.get_or_create(
+                    word = word
+                )
+            except Keyword.MultipleObjectsReturned:
+                print("Duplicate keyword")
 
     events = Event.objects.all().order_by("id").reverse()
     paginator = Paginator(events, 10) # Shows only 10 records per page
