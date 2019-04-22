@@ -22,7 +22,7 @@ import os
 from rest_framework import generics
 
 from event_loop.models import Location, Event, Keyword, Profile
-from event_loop.serializers import EventSerializer
+from event_loop.serializers import EventSerializer, KeywordSerializer
 
 def root(request):
     return HttpResponseRedirect('/home')
@@ -34,6 +34,10 @@ class ListEvent(generics.ListCreateAPIView):
 class DetailEvent(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+class ListKeyword(generics.ListCreateAPIView):
+    queryset = Keyword.objects.all()
+    serializer_class = KeywordSerializer
 
 def home_page(request):
 
