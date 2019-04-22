@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import Pagination from "react-js-pagination";
+// require("bootstrap/less/bootstrap.less");
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 function truncateString(str, num) {
@@ -10,30 +14,61 @@ function truncateString(str, num) {
   }
 }
 
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+
 class EventsList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      events: []
+      events: [],
+      activePage: 10,
+      startDate: new Date()
     };
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
 
-  async componentDidMount() {
+  // handlePageChange(pageNumber) {
+  //   console.log(`active page is ${pageNumber}`);
+  //   this.setState({activePage: pageNumber});
+  // }
+
+
+  async componentDidMount(pageNumber, date) {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/');
       const events = await response.json();
+      console.log(`active page is ${pageNumber}`)
       this.setState({
-        events
+        events,
+        activePage: pageNumber,
+        startDate: date
       });
     } catch (error) {
       console.log(error);
     }
   }
 
+
+
   render() {
     return (
       <div>
+        Choose Date: <DatePicker
+        selected={this.state.startDate}
+        onChange={this.handleChange}
+        withPortal
+        minDate={new Date()}
+        maxDate={addDays(new Date(), 7)}
+        placeholderText="Click to select a date"
+        todayButton={"Today"}
+        dateFormat="/MM/dd/yyyy"
+      />
         <h3>What's happening today?</h3>
         <ol class="events-list">
 
@@ -49,14 +84,28 @@ class EventsList extends Component {
             <p><a href="{% url 'event_show' id=event.pk %}"> See Details</a></p>
             </div>
           </li>
+
         ))}
         </ol>
-        <ul class="pagination"></ul>
+        <div>
+          <Pagination
+            activePage={this.state.activePage}
+            itemsCountPerPage={10}
+            totalItemsCount={this.state.events.length}
+            pageRangeDisplayed={5}
+            onChange={this.componentDidMount}
+            prevPageText={`Previous`}
+            nextPageText={`Next`}
+          />
+        </div>
+
 
       </div>
+
     );
   }
 }
+
 
 ReactDOM.render(<EventsList />, document.getElementById('root'));
 

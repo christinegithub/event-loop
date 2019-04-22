@@ -3,9 +3,7 @@ import styles from './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import EventsMap from './EventsMap';
 import EventsList from './EventsList';
-import Pagination from './Pagination';
 import EventDetails from './EventDetails';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -48,7 +46,6 @@ function Home({ match }) {
         </li>
       </ul>
       <EventsList />
-      <Pagination />
       <EventsMap />
 
       <Route
