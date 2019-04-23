@@ -46,7 +46,7 @@ function Home({ match }) {
         </li>
       </ul>
       <EventsList />
-      <EventsMap />
+  
 
       <Route
         exact

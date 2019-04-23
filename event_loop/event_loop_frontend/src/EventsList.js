@@ -41,10 +41,10 @@ class EventsList extends Component {
   }
 
   handleDateChange(date) {
-    const events = this.state.events.filter(event => Date(event.date) == date);
-    console.log(Date(this.state.events[0].date));
-    console.log(date);
-    console.log(events);
+    const events = this.state.events.filter(event => true);
+    // console.log(Date(this.state.events[0].date));
+    // console.log(typeof(date));
+    // console.log(events);
      this.setState({
        dated_events: events,
        startDate: date
