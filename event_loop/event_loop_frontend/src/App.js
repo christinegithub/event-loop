@@ -5,6 +5,7 @@ import EventsMapView from './EventsMapView';
 import EventsList from './EventsList';
 import Pagination from './Pagination';
 import EventDetails from './EventDetails';
+import Autosuggest from './AutocompleteKeywords'
 
 function App() {
   return (
@@ -63,6 +64,8 @@ class Home extends React.Component {
         <Pagination />
         <EventsMapView eventLocations={this.state.eventLocations} />
         </div>
+        <h2>Filter Events based on your Interests</h2>
+        <Autosuggest />
         <Route
           exact
           path={this.props.match.path}

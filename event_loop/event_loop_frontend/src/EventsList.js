@@ -46,7 +46,8 @@ class EventsList extends Component {
             <p>Date: {event.date}</p>
             <p>Start Time: {event.start_time}</p>
             <p>End Time: {event.end_time}</p>
-            <p><a href="{% url 'event_show' id=event.pk %}"> See Details</a></p>
+            <p><a href={`events/`+ event.id}> See Details</a></p>
+
             </div>
           </li>
         ))}

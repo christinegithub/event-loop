@@ -21,6 +21,7 @@ urlpatterns = [
 
     path('api/', views.ListEvent.as_view()),
     path('api/<int:pk>/', views.DetailEvent.as_view()),
+    path('api/keywords', views.ListKeyword.as_view()),
 
     path('admin/', admin.site.urls),
     path('', views.root),

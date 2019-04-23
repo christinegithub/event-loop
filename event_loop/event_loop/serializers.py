@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from event_loop.models import Event
+from event_loop.models import Event, Keyword
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,3 +10,12 @@ class EventSerializer(serializers.ModelSerializer):
             'date',
         )
         model = Event
+
+
+class KeywordSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'word',
+            'events'
+        )
+        model = Keyword

@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import CardHeader from '@material-ui/core/CardHeader';
+import EventsMap from './EventsMap';
+
 
 const styles = {
   card: {
@@ -21,7 +23,7 @@ const styles = {
 export default class EventDetails extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.match.params.id);
+    console.log(props);
     this.state = {
       error: null,
       isLoaded: false,
@@ -43,6 +45,7 @@ export default class EventDetails extends React.Component {
 
   componentDidMount() {
     this.fetchDetails(this.props.match.params.id);
+
   }
 
   fetchDetails(id) {
@@ -87,16 +90,16 @@ export default class EventDetails extends React.Component {
                        <b>{props.title}</b>
 
                      </Typography>
-                     <Typography variant="subtitle1" color="Blue">
+                     <Typography variant="subtitle1" color="primary">
                        <b>Starting</b> : {props.start_date}
                      </Typography>
-                     <Typography variant="subtitle1" color="textBlue">
+                     <Typography variant="subtitle1" color="primary">
                        <b>Ending: </b>{props.end_date}
                      </Typography>
-                     <Typography variant="subtitle1" color="black">
+                     <Typography variant="subtitle1" color="textPrimary">
                        <b>Address</b>: {props.address + "," + props.city}
                      </Typography>
-                     <Typography variant="subtitle1" color="black">
+                     <Typography variant="subtitle1" color="textPrimary">
                        <b>Venue :</b> {props.venue}
                      </Typography>
 
@@ -105,8 +108,7 @@ export default class EventDetails extends React.Component {
                       </Typography>
                     </CardContent>
 
-                    <CardActions>
-                    </CardActions>
+                    <EventsMap />
                 </Card>
             ) : null}
         </div>
