@@ -1,11 +1,10 @@
 import React from "react";
 import styles from './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import EventsMap from './EventsMap';
+import EventsMapView from './EventsMapView';
 import EventsList from './EventsList';
 import Pagination from './Pagination';
 import EventDetails from './EventDetails';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -47,16 +46,15 @@ function Home({ match }) {
           <Link to={`events/134280`}>Event #1</Link>
         </li>
       </ul>
+      <div className="grid-container">
       <EventsList />
       <Pagination />
-      <EventsMap />
-
+      <EventsMapView />
+      </div>
       <Route
         exact
         path={match.path}
-
-        render={() => <h3>Please select a event.</h3>}
-
+        render={() => <h3>Please select an event.</h3>}
       />
     </div>
   );
