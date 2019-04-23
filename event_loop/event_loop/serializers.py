@@ -8,6 +8,8 @@ class EventSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'date',
+            'start_time',
+            'end_time'
         )
         model = Event
 

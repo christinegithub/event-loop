@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import CardHeader from '@material-ui/core/CardHeader';
-import EventsMap from './EventsMap';
+import EventsMapView from './EventsMapView';
 
 
 // const styles = {
@@ -66,7 +66,8 @@ export default class EventDetails extends React.Component {
             venue: data.venue_name,
             image_url: data.image_url + "?width=1280&height=720",
             lat: data.location.latitude,
-            long: data.location.longitude
+            long: data.location.longitude,
+            eventLocations: [{ lat: 43.6475, lng: -79.38702 },{ lat: 43.656804, lng: -79.409055 }],
           },
           isLoading: false,
         })
@@ -115,8 +116,8 @@ export default class EventDetails extends React.Component {
                       </Typography>
 
                     </CardContent>
-
-                    <EventsMap />
+                    <EventsMapView eventLocations={props.eventLocations} />
+                    // <EventsMapView />
 
                 </Card>
             ) : null}

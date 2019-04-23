@@ -35,4 +35,3 @@ class Profile(models.Model):
     @classmethod
     def exists_for_user(self, user):
         return Profile.objects.filter(user_id=user.id).exists()
-
