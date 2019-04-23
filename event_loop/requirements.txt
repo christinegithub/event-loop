@@ -3,15 +3,13 @@ chardet==3.0.4
 Django==2.2
 django-appconf==1.0.3
 django-bootstrap-pagination==1.7.0
-django-classy-tags==0.8.0
+django-compat==1.0.15
 django-cors-headers==2.5.2
-django-easy-maps==1.0.0
 djangorestframework==3.9.2
 geographiclib==1.49
 geopy==1.19.0
 idna==2.8
 nltk==3.4
-Paginator==0.5.1
 pytz==2019.1
 rake-nltk==1.0.4
 requests==2.21.0
