@@ -23,6 +23,7 @@ from rest_framework import generics
 
 from event_loop.models import Location, Event, Keyword, Profile
 from event_loop.serializers import EventSerializer
+from event_loop.tasks import get_events
 
 def root(request):
     return HttpResponseRedirect('/home')
@@ -71,7 +72,6 @@ def home_page(request):
                 date = date,
                 image_url = event["image_url"] + "?width=600&height=600",
                 start_time = event["start_time"],
-                # venue = event["venue_name"],
                 end_time = event["end_time"],
                 blogto_id = event["id"],
                 venue_name = event["venue_name"])
