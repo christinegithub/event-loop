@@ -4,7 +4,11 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
-    "@material-ui/styles": "^3.0.0-alpha.10",
+    "bootstrap": "^4.3.1",
+    "bootstrap-less": "^3.3.8",
+    "prop-types": "^15.7.2",
+    "react-datepicker": "^2.4.0",
+    "react-dates": "^20.1.0",
     "axios": "^0.18.0",
     "dotenv": "^7.0.0",
     "downshift": "^3.2.8",
@@ -15,7 +19,9 @@
     "react-js-pagination": "^3.0.2",
     "react-paginate": "^6.3.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "reactstrap": "^8.0.0",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -38,7 +38,8 @@ export default class EventDetails extends React.Component {
         venue: undefined,
         image_url: undefined,
         lat: undefined,
-        long: undefined
+        long: undefined,
+
       }
     };
   }
@@ -63,7 +64,8 @@ export default class EventDetails extends React.Component {
             venue: data.venue_name,
             image_url: data.image_url + "?width=1280&height=720",
             lat: data.location.latitude,
-            long: data.location.longitude
+            long: data.location.longitude,
+            eventLocations: [{ lat: 43.6475, lng: -79.38702 },{ lat: 43.656804, lng: -79.409055 }],
           },
           isLoading: false,
         })
@@ -73,6 +75,7 @@ export default class EventDetails extends React.Component {
 
   render() {
     console.log(this.state.event);
+    console.log(this.state.eventLocations);
     const EventRender = (props) => {
     return(
         <div>
@@ -107,8 +110,8 @@ export default class EventDetails extends React.Component {
                         <b>Description</b>: {props.description}
                       </Typography>
                     </CardContent>
+                    <EventsMapView eventLocations={props.eventLocations} />
 
-                    <EventsMapView />
                 </Card>
             ) : null}
         </div>

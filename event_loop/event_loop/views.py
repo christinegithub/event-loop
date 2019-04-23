@@ -53,7 +53,7 @@ class ListKeyword(generics.ListCreateAPIView):
 def home_page(request):
 
     bundle_type = 'medium'
-    date = '2019-04-18'
+    date = '2019-04-23'
     limit = 9999
     offset = 0
     status = 'ongoing'

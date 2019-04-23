@@ -1,10 +1,9 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import Axios from 'axios';
+import axios from 'axios';
 
 const interests = [];
 
-const axios = require('axios');
 axios.get('http://localhost:8000/api/keywords')
     .then(function (response) {
         console.log(response)

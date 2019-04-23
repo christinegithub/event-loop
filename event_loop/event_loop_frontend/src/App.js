@@ -3,7 +3,6 @@ import styles from './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import EventsMapView from './EventsMapView';
 import EventsList from './EventsList';
-import Pagination from './Pagination';
 import EventDetails from './EventDetails';
 import Autosuggest from './AutocompleteKeywords'
 
@@ -43,6 +42,7 @@ class About extends React.Component {
   }
 }
 
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +61,6 @@ class Home extends React.Component {
         </ul>
         <div className="grid-container">
         <EventsList />
-        <Pagination />
         <EventsMapView eventLocations={this.state.eventLocations} />
         </div>
         <h2>Filter Events based on your Interests</h2>
