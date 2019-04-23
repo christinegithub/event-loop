@@ -22,7 +22,7 @@ import os
 from rest_framework import generics
 
 from event_loop.models import Location, Event, Keyword, Profile
-from event_loop.serializers import EventSerializer, KeywordSerializer
+from event_loop.serializers import EventSerializer, LocationSerializer, KeywordSerializer
 from event_loop.tasks import get_events
 from rake_nltk import Rake
 
@@ -37,6 +37,14 @@ class ListEvent(generics.ListCreateAPIView):
 class DetailEvent(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+class ListLocation(generics.ListCreateAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
+
+class DetailLocation(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
 
 class ListKeyword(generics.ListCreateAPIView):
     queryset = Keyword.objects.all()

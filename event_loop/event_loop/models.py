@@ -6,8 +6,8 @@ class Location(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     province = models.CharField(max_length=255)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
 
 class Event(models.Model):
     title = models.CharField(max_length=255)
@@ -16,10 +16,10 @@ class Event(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    is_multiple_days = models.BooleanField(null=True)
     event_url = models.URLField(max_length=255, null=True)
     blogto_id = models.IntegerField()
     venue_name = models.CharField(max_length=255)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="events")
 
 class Keyword(models.Model):
     word = models.CharField(max_length=255, unique=True)
@@ -35,4 +35,3 @@ class Profile(models.Model):
     @classmethod
     def exists_for_user(self, user):
         return Profile.objects.filter(user_id=user.id).exists()
-
