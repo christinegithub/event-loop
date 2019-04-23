@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import Pagination from "react-js-pagination";
-// require("bootstrap/less/bootstrap.less");
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import EventsPagination from './EventsPagination';
+import EventsDate from './EventsDate';
 
 
-function truncateString(str, num) {
-  if (str.length > num) {
-    return str.slice(0, num) + "...";
-  } else {
-   return str;
-  }
-}
+
 
 function addDays(date, days) {
   var result = new Date(date);
@@ -26,29 +20,48 @@ class EventsList extends Component {
     super(props);
     this.state = {
       events: [],
-      activePage: 10,
+      divisble_events: [],
+      dated_events: [],
+      activePage: 1,
       startDate: new Date()
     };
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
 
-  // handlePageChange(pageNumber) {
-  //   console.log(`active page is ${pageNumber}`);
-  //   this.setState({activePage: pageNumber});
-  // }
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    const events = this.state.dated_events.slice(((pageNumber - 1) * 10), (pageNumber * 10));
+    this.setState({
+      divisble_events: events,
+      activePage: pageNumber
+    });
+  }
+
+  handleDateChange(date) {
+    const events = this.state.events.filter(event => Date(event.date) == date);
+    console.log(Date(this.state.events[0].date));
+    console.log(date);
+    console.log(events);
+     this.setState({
+       dated_events: events,
+       startDate: date
+     });
+     const divisble_events = this.handlePageChange(1);
+   }
 
 
-  async componentDidMount(pageNumber, date) {
+  async componentDidMount(pageNumber) {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/');
       const events = await response.json();
-      console.log(`active page is ${pageNumber}`)
       this.setState({
         events,
-        activePage: pageNumber,
-        startDate: date
       });
+
+      this.handleDateChange(this.state.startDate);
     } catch (error) {
       console.log(error);
     }
@@ -59,43 +72,29 @@ class EventsList extends Component {
   render() {
     return (
       <div>
-        Choose Date: <DatePicker
-        selected={this.state.startDate}
-        onChange={this.handleChange}
-        withPortal
-        minDate={new Date()}
-        maxDate={addDays(new Date(), 7)}
-        placeholderText="Click to select a date"
-        todayButton={"Today"}
-        dateFormat="/MM/dd/yyyy"
-      />
-        <h3>What's happening today?</h3>
-        <ol class="events-list">
-
-        {this.state.events.map(event => (
-
-          <li class="each-event">
-            <div key={event.id}>
-            <h1>{event.title}</h1>
-            <p>{truncateString(event.description, 200)}</p>
-            <p>Date: {event.date}</p>
-            <p>Start Time: {event.start_time}</p>
-            <p>End Time: {event.end_time}</p>
-            <p><a href="{% url 'event_show' id=event.pk %}"> See Details</a></p>
-            </div>
-          </li>
-
-        ))}
-        </ol>
         <div>
-          <Pagination
+          Choose Date: <DatePicker
+          selected={this.state.startDate}
+          onChange={this.handleDateChange}
+          withPortal
+          minDate={new Date()}
+          maxDate={addDays(new Date(), 7)}
+          placeholderText="Click to select date"
+          shouldCloseOnSelect={true}
+          todayButton={"Today"}
+          dateFormat="yyyy-MM-dd"
+          />
+        </div>
+
+        <EventsDate
+          events={this.state.divisble_events}
+        />
+
+        <div>
+          <EventsPagination
             activePage={this.state.activePage}
-            itemsCountPerPage={10}
             totalItemsCount={this.state.events.length}
-            pageRangeDisplayed={5}
-            onChange={this.componentDidMount}
-            prevPageText={`Previous`}
-            nextPageText={`Next`}
+            handlePageChange={this.handlePageChange}
           />
         </div>
 
