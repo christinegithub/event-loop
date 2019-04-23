@@ -23,6 +23,7 @@ from rest_framework import generics
 
 from event_loop.models import Location, Event, Keyword, Profile
 from event_loop.serializers import EventSerializer, KeywordSerializer
+from event_loop.tasks import get_events
 from rake_nltk import Rake
 
 
@@ -77,7 +78,6 @@ def home_page(request):
                 date = date,
                 image_url = event["image_url"] + "?width=600&height=600",
                 start_time = event["start_time"],
-                # venue = event["venue_name"],
                 end_time = event["end_time"],
                 blogto_id = event["id"],
                 venue_name = event["venue_name"])
@@ -91,7 +91,7 @@ def home_page(request):
     for event in event_body["results"]:
         r.extract_keywords_from_text(event["description_stripped"])
         word_list = r.get_ranked_phrases()
-    
+
         for word in word_list:
             try:
                 Keyword.objects.get_or_create(

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import CardHeader from '@material-ui/core/CardHeader';
-import EventsMap from './EventsMap';
+import EventsMapView from './EventsMapView';
 
 
 const styles = {
@@ -108,7 +108,7 @@ export default class EventDetails extends React.Component {
                       </Typography>
                     </CardContent>
 
-                    <EventsMap />
+                    <EventsMapView />
                 </Card>
             ) : null}
         </div>
