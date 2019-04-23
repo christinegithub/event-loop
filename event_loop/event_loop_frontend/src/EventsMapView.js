@@ -23,12 +23,10 @@ class EventsMapView extends React.PureComponent {
     console.log('New currnet lng: ', this.state.currentLng);
     console.log(this.props.eventLocations);
   }
-  console.log(prevState);
 }
 
   setMyLocation() {
     navigator.geolocation.getCurrentPosition(position => {
-      console.log(position);
       this.setState(
         {currentLat: position.coords.latitude, currentLng: position.coords.longitude}
       );
