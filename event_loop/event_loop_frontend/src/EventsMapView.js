@@ -18,8 +18,10 @@ class EventsMapView extends React.PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
   if (this.state.currentLat !== prevState.currentLat && this.state.currentLng !== prevState.currentLng) {
+    console.log('Current location found!');
     console.log('New current lat: ', this.state.currentLat);
     console.log('New currnet lng: ', this.state.currentLng);
+    console.log(this.props.eventLocations);
   }
 }
 
@@ -51,6 +53,7 @@ class EventsMapView extends React.PureComponent {
         onMarkerClick={this.handleMarkerClick}
         currentLat={this.state.currentLat}
         currentLng={this.state.currentLng}
+        events={this.props.eventLocations}
       />
     )
   }

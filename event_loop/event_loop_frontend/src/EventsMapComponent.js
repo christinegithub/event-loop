@@ -11,18 +11,17 @@ const EventsMapComponent = compose(
     loadingElement: <div style={{ height: '100%' }} />,
     containerElement: <div style={{ height: '400px' }} />,
     mapElement: <div style={{ height: '100%' }} />,
-    markers: [{ lat: 43.6475, lng: -79.38702 }, { lat: 43.656804, lng: -79.409055 }],
   }),
   withScriptjs,
   withGoogleMap)((props) =>
   <GoogleMap
-    defaultZoom={15}
+    defaultZoom={14}
     center={{ lat: props.currentLat, lng: props.currentLng }}
   >
     {props.isMarkerShown &&
-      props.markers.map((marker, index) => (
+      props.events.map((event, index) => (
         <Marker
-        position={{ lat: marker.lat, lng: marker.lng }}
+        position={{ lat: event.lat, lng: event.lng }}
         onClick={props.onMarkerClick}
         key={index}
         />
