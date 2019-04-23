@@ -10,15 +10,18 @@ import CardHeader from '@material-ui/core/CardHeader';
 import EventsMap from './EventsMap';
 
 
-const styles = {
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    // ⚠️ object-fit is not supported by IE 11.
-    objectFit: 'cover',
-  },
-};
+// const styles = {
+//   card: {
+//     maxWidth: 345,
+//   },
+//   media: {
+//     // ⚠️ object-fit is not supported by IE 11.
+//     // objectFit: 'cover',
+//     height: 100,     // as an example I am modifying width and height
+//     width: '33%',
+//     marginLeft: '33%'
+//   },
+// };
 
 export default class EventDetails extends React.Component {
   constructor(props) {
@@ -77,38 +80,44 @@ export default class EventDetails extends React.Component {
     return(
         <div>
             { props.id ? (
-              <Card style={{maxWidth: 640}}>
+              <Card style={{maxWidth: 2000 , backgroundColor: "lightGrey"}}>
+
                 <CardMedia
                   component="img"
                   alt= {props.title}
                   className={{objectFit: 'cover'}}
-                  height="360"
+                  height="360"     // as an example I am modifying width and height
+                  width="640"
+
+
                   image={props.image_url}
                 />
                    <CardContent>
                      <Typography variant="title" color="textPrimary">
-                       <b>{props.title}</b>
-
-                     </Typography>
-                     <Typography variant="subtitle1" color="primary">
-                       <b>Starting</b> : {props.start_date}
-                     </Typography>
-                     <Typography variant="subtitle1" color="primary">
-                       <b>Ending: </b>{props.end_date}
-                     </Typography>
-                     <Typography variant="subtitle1" color="textPrimary">
-                       <b>Address</b>: {props.address + "," + props.city}
-                     </Typography>
-                     <Typography variant="subtitle1" color="textPrimary">
-                       <b>Venue :</b> {props.venue}
+                       <h2><b>{props.title}</b></h2>
                      </Typography>
 
-                      <Typography component="p">
-                        <b>Description</b>: {props.description}
+                     <Typography variant="subtitle1" color="primary">
+                       <h3><b>Starting</b> : {props.start_date}</h3>
+                     </Typography>
+                     <Typography variant="subtitle1" color="primary">
+                       <h3><b>Ending: </b>{props.end_date}</h3>
+                     </Typography>
+                     <Typography variant="subtitle1" color="textPrimary">
+                       <h3><b>Address</b>: {props.address + "," + props.city}</h3>
+                     </Typography>
+                     <Typography variant="subtitle1" color="textPrimary">
+                       <h3><b>Venue :</b> {props.venue}</h3>
+                     </Typography>
+
+                      <Typography component="p" color="textSecondary">
+                        <h2><i>Description</i>: <i>{props.description}</i></h2>
                       </Typography>
+
                     </CardContent>
 
                     <EventsMap />
+
                 </Card>
             ) : null}
         </div>
