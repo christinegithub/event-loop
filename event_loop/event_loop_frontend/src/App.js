@@ -5,6 +5,7 @@ import EventsMap from './EventsMap';
 import EventsList from './EventsList';
 import Pagination from './Pagination';
 import EventDetails from './EventDetails';
+import Autosuggest from './AutocompleteKeywords'
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function Home({ match }) {
       <EventsList />
       <Pagination />
       <EventsMap />
+      <h2>Filter Events based on your Interests</h2>
+      <Autosuggest />
+
       <Route
         exact
         path={match.path}
