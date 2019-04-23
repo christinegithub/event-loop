@@ -7,7 +7,6 @@ import Pagination from './Pagination';
 import EventDetails from './EventDetails';
 import Autosuggest from './AutocompleteKeywords'
 
-
 function App() {
   return (
     <Router>
@@ -43,11 +42,6 @@ function Home({ match }) {
   return (
     <div>
       <h2>Events</h2>
-      <ul>
-        <li>
-          <Link to={`events/134280`}>Event #1</Link>
-        </li>
-      </ul>
       <EventsList />
       <Pagination />
       <EventsMap />
