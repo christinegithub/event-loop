@@ -23,7 +23,8 @@ urlpatterns = [
     path('api/events/<int:pk>/', views.DetailEvent.as_view()),
     path('api/locations/', views.ListLocation.as_view()),
     path('api/locations/<int:pk>/', views.DetailLocation.as_view()),
-    path('api/keywords', views.ListKeyword.as_view()),
+    path('api/keywords/', views.ListKeyword.as_view()),
+    path('api/keywords/<int:pk>/', views.DetailKeyword.as_view()),
 
     path('admin/', admin.site.urls),
     path('', views.root),

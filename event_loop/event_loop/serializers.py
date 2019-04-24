@@ -14,9 +14,11 @@ class EventSerializer(serializers.ModelSerializer):
             'event_url',
             'blogto_id',
             'venue_name',
-            'location'
+            'location',
+            'keywords'
         )
         model = Event
+        depth = 1
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,7 +35,9 @@ class LocationSerializer(serializers.ModelSerializer):
 class KeywordSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            'id',
             'word',
             'events'
         )
         model = Keyword
+        depth = 1

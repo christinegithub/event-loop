@@ -14,7 +14,6 @@ def get_events():
     event_list = json.loads(event_list_json.content)
     print(event_list)
 
-    #
     for event_summary in event_list["results"]:
         event_full_json = requests.get(f"https://www.blogto.com/api/v2/events/{event_summary['id']}")
         print(event_full_json)
