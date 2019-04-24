@@ -69,7 +69,9 @@ class Example extends React.Component {
       this.setState({
         events: response.data.events
       })
-    })
+    }).catch(function(error) {
+      console.log(error);
+  });
   }
 
 
