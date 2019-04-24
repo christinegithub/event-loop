@@ -38,6 +38,7 @@ class EventsList extends Component {
       divisble_events: events,
       activePage: pageNumber
     });
+    this.props.updateMap(events);
   }
 
   handleDateChange(date) {
