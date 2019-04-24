@@ -22,6 +22,7 @@ class EventsPagination extends Component {
               onChange={this.props.handlePageChange}
               prevPageText={`Previous`}
               nextPageText={`Next`}
+              hideDisabled={true}
             />
           </div>
         </div>

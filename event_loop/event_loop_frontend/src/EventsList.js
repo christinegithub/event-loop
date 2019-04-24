@@ -4,8 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import EventsPagination from './EventsPagination';
 import EventsDate from './EventsDate';
-
-
+import moment from 'moment';
 
 
 function addDays(date, days) {
@@ -14,13 +13,17 @@ function addDays(date, days) {
   return result;
 }
 
+function formatDate(date){
+    return moment(date).format("YYYY-MM-DD");
+}
+
 
 class EventsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       events: [],
-      divisble_events: [],
+      divisible_events: [],
       dated_events: [],
       activePage: 1,
       startDate: new Date()
@@ -30,33 +33,39 @@ class EventsList extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
+  getEventsForPage(events, pageNumber) {
+    return events.slice(((pageNumber - 1) * 10), (pageNumber * 10));
+  }
 
   handlePageChange(pageNumber) {
-    console.log(`active page is ${pageNumber}`);
-    const events = this.state.dated_events.slice(((pageNumber - 1) * 10), (pageNumber * 10));
+    const events = this.getEventsForPage(this.state.dated_events, pageNumber)
+
     this.setState({
-      divisble_events: events,
+      divisible_events: events,
       activePage: pageNumber
     });
   }
 
   handleDateChange(date) {
-    const events = this.state.events.filter(event => true);
-    // console.log(Date(this.state.events[0].date));
-    // console.log(typeof(date));
-    // console.log(events);
+     const events = this.state.events.filter(event => event.date === formatDate(new Date(date)));
+     const pageNumber = 1
+     const divisible_events = this.getEventsForPage(events, pageNumber)
+
      this.setState({
        dated_events: events,
-       startDate: date
+       startDate: date,
+       divisible_events,
+       activePage: pageNumber
      });
-     const divisble_events = this.handlePageChange(1);
    }
 
 
   async componentDidMount(pageNumber) {
     try {
+
       const response = await fetch('http://127.0.0.1:8000/api/');
       const events = await response.json();
+
       this.setState({
         events,
       });
@@ -87,7 +96,7 @@ class EventsList extends Component {
         </div>
 
         <EventsDate
-          events={this.state.divisble_events}
+          events={this.state.divisible_events}
         />
 
         <div>

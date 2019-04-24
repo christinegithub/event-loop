@@ -109,3 +109,12 @@
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
 }
+
+.pagination {
+  list-style: none;
+  text-align: center;
+}
+
+.active {
+  display: inline;
+}
