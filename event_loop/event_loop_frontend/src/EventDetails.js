@@ -1,29 +1,14 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import red from '@material-ui/core/colors/red';
 import CardHeader from '@material-ui/core/CardHeader';
 import EventsMapView from './EventsMapView';
 
 
-// const styles = {
-//   card: {
-//     maxWidth: 345,
-//   },
-//   media: {
-//     // ⚠️ object-fit is not supported by IE 11.
-//     // objectFit: 'cover',
-//     height: 100,     // as an example I am modifying width and height
-//     width: '33%',
-//     marginLeft: '33%'
-//   },
-// };
 
-export default class EventDetails extends React.Component {
+class EventDetails extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
@@ -83,46 +68,43 @@ export default class EventDetails extends React.Component {
     return(
         <div>
             { props.id ? (
-              <Card style={{maxWidth: 2000 , backgroundColor: "lightGrey"}}>
+              <Card style={{width: '50%', 'padding-left': '25%' }}>
 
                 <CardMedia
                   component="img"
-                  alt= {props.title}
-                  className={{objectFit: 'cover'}}
                   height="360"     // as an example I am modifying width and height
                   width="640"
-
-
+                  style={{background: 'cover'}}
                   image={props.image_url}
                 />
                    <CardContent>
                      <Typography variant="title" color="textPrimary">
-                       <h2><b>{props.title}</b></h2>
+                       <b>{props.title}</b>
                      </Typography>
 
                      <Typography variant="subtitle1" color="primary">
-                       <h3><b>Starting</b> : {props.start_date}</h3>
+                       <b>Starting</b> : {props.start_date}
                      </Typography>
+
                      <Typography variant="subtitle1" color="primary">
-                       <h3><b>Ending: </b>{props.end_date}</h3>
+                       <b>Ending: </b>{props.end_date}
                      </Typography>
+
                      <Typography variant="subtitle1" color="textPrimary">
-                       <h3><b>Address</b>: {props.address + "," + props.city}</h3>
+                       <b>Address</b>: {props.address + "," + props.city}
                      </Typography>
+
                      <Typography variant="subtitle1" color="textPrimary">
-                       <h3><b>Venue :</b> {props.venue}</h3>
+                       <b>Venue :</b> {props.venue}
                      </Typography>
 
                       <Typography component="p" color="textSecondary">
-                        <h2><i>Description</i>: <i>{props.description}</i></h2>
+                        <i>Description</i>: <i>{props.description}</i>
                       </Typography>
 
                     </CardContent>
                     <EventsMapView eventLocations={props.eventLocations} />
-<<<<<<< HEAD
-                    // <EventsMapView />
-=======
->>>>>>> master
+
 
                 </Card>
             ) : null}
@@ -132,3 +114,5 @@ export default class EventDetails extends React.Component {
     return EventRender(this.state.event);
   }
 }
+
+export default EventDetails;
