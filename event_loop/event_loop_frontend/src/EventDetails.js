@@ -49,7 +49,7 @@ class EventDetails extends React.Component {
             end_time: data.end_time,
             venue: data.venue_name,
             image_url: data.image_url,
-            eventLocations: [{ lat: parseFloat(data.location.latitude), lng: parseFloat(data.location.longitude)}],
+            location: { latitude: parseFloat(data.location.latitude), longitude: parseFloat(data.location.longitude)},
           },
           isLoading: false,
         })
@@ -108,7 +108,7 @@ class EventDetails extends React.Component {
                       </Typography>
 
                     </CardContent>
-                    <EventsMapView eventLocations={props.eventLocations} />
+                    <EventsMapView events={[this.state.event]} />
 
 
                 </Card>

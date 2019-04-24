@@ -19,7 +19,6 @@ class EventsMapView extends React.PureComponent {
     console.log('Current location found!');
     console.log('New current lat: ', this.state.currentLat);
     console.log('New currnet lng: ', this.state.currentLng);
-    console.log(this.props.eventLocations);
   }
 }
 
