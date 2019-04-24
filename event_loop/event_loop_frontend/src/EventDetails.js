@@ -37,9 +37,6 @@ export default class EventDetails extends React.Component {
         end_date: undefined,
         venue: undefined,
         image_url: undefined,
-        lat: undefined,
-        long: undefined,
-
       }
     };
   }
@@ -63,9 +60,7 @@ export default class EventDetails extends React.Component {
             end_date: data.end_date_time,
             venue: data.venue_name,
             image_url: data.image_url + "?width=1280&height=720",
-            lat: data.location.latitude,
-            long: data.location.longitude,
-            eventLocations: [{ lat: 43.6475, lng: -79.38702 },{ lat: 43.656804, lng: -79.409055 }],
+            eventLocations: [{ lat: parseFloat(data.location.latitude), lng: parseFloat(data.location.longitude)}],
           },
           isLoading: false,
         })
@@ -80,17 +75,17 @@ export default class EventDetails extends React.Component {
     return(
         <div>
             { props.id ? (
-              <Card style={{maxWidth: 640}}>
+              <Card style={{maxWidth: 640}, {backgroundColor: "lightGrey"}}>
                 <CardMedia
                   component="img"
                   alt= {props.title}
-                  className={{objectFit: 'cover'}}
                   height="360"
+                  width="10%"
                   image={props.image_url}
                 />
                    <CardContent>
                      <Typography variant="title" color="textPrimary">
-                       <b>{props.title}</b>
+                       <h2><b>{props.title}</b></h2>
 
                      </Typography>
                      <Typography variant="subtitle1" color="primary">
@@ -106,8 +101,8 @@ export default class EventDetails extends React.Component {
                        <b>Venue :</b> {props.venue}
                      </Typography>
 
-                      <Typography component="p">
-                        <b>Description</b>: {props.description}
+                      <Typography component="p" color="textSecondary">
+                        <h3><b>Description</b>: <i>{props.description}</i></h3>
                       </Typography>
                     </CardContent>
                     <EventsMapView eventLocations={props.eventLocations} />
