@@ -41,3 +41,6 @@ class KeywordSerializer(serializers.ModelSerializer):
         )
         model = Keyword
         depth = 1
+        # extra_kwargs = {
+        #     'events': {'lookup_field': 'word'}
+        # }

@@ -55,6 +55,7 @@ class ListKeyword(generics.ListCreateAPIView):
 class DetailKeyword(generics.RetrieveUpdateDestroyAPIView):
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer
+    lookup_field = 'word'
 
 def home_page(request):
     # get the json with events for a specific date
