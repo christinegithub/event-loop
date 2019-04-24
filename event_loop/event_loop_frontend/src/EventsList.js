@@ -82,7 +82,8 @@ class EventsList extends Component {
     return (
       <div>
         <div>
-          Choose Date: <DatePicker
+          <h2>
+          What's happening on: <DatePicker
           selected={this.state.startDate}
           onChange={this.handleDateChange}
           withPortal
@@ -91,8 +92,9 @@ class EventsList extends Component {
           placeholderText="Click to select date"
           shouldCloseOnSelect={true}
           todayButton={"Today"}
-          dateFormat="yyyy-MM-dd"
-          />
+          dateFormat="MMM dd, yyyy"
+          className="datepicker"
+          /></h2>
         </div>
 
         <EventsDate

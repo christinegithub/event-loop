@@ -38,6 +38,9 @@
   height: 600px;
   width: 90%;
   border: 2px solid grey;
+  list-style: none;
+  padding: 10px 30px;
+
 }
 
 .each-event:hover {
@@ -46,6 +49,7 @@
 
 .each-event {
   margin-top: 10px;
+  border-bottom: dotted 2px gray;
 }
 
 .each-event:first-child {
@@ -112,9 +116,29 @@
 
 .pagination {
   list-style: none;
+  margin-top: 40px;
+}
+
+.pagination-list-item {
+  display: inline;
   text-align: center;
+  border: solid #777272 1px;
+  padding: 10px 15px;
+  background: #d6e1f3;
+}
+
+.pagination-link {
+  text-decoration: none;
 }
 
 .active {
-  display: inline;
+  background: white;
+}
+
+.datepicker {
+  height: 30px;
+  width: 140px;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
 }

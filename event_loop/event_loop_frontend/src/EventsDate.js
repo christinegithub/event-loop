@@ -18,7 +18,6 @@ class EventsDate extends Component {
     return (
       <div>
 
-        <h3>What's happening?</h3>
         <ol class="events-list">
 
         {this.props.events.map(event => (

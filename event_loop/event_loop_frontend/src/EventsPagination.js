@@ -23,6 +23,8 @@ class EventsPagination extends Component {
               prevPageText={`Previous`}
               nextPageText={`Next`}
               hideDisabled={true}
+              itemClass="pagination-list-item"
+              activeLinkClass="pagination-link"
             />
           </div>
         </div>
