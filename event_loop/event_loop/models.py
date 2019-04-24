@@ -8,6 +8,8 @@ class Location(models.Model):
     province = models.CharField(max_length=255)
     latitude = models.FloatField(null=True)
     longitude = models.FloatField(null=True)
+    class Meta:
+        unique_together = (('latitude', 'longitude'),)
 
 class Event(models.Model):
     title = models.CharField(max_length=255)
