@@ -35,19 +35,20 @@ class EventDetails extends React.Component {
   }
 
   fetchDetails(id) {
-    fetch('https://www.blogto.com/api/v2/events/' + id + "/")
+    fetch('http://127.0.0.1:8000/api/events/' + id + "/")
     .then(response => response.json())
     .then( data => this.setState({
           event: {
             id: data.id,
             title: data.title,
-            description: data.description_stripped,
-            address: data.address,
-            city: data.city,
-            start_date: data.start_date_time,
-            end_date: data.end_date_time,
+            description: data.description,
+            address: data.location.address,
+            city: data.location.city,
+            date: data.date,
+            start_time: data.start_time,
+            end_time: data.end_time,
             venue: data.venue_name,
-            image_url: data.image_url + "?width=1280&height=720",
+            image_url: data.image_url,
             eventLocations: [{ lat: parseFloat(data.location.latitude), lng: parseFloat(data.location.longitude)}],
           },
           isLoading: false,
@@ -82,11 +83,15 @@ class EventDetails extends React.Component {
                      </Typography>
 
                      <Typography variant="subtitle1" color="primary">
-                       <b>Starting</b> : {props.start_date}
+                       <b>Date</b> : {props.date}
                      </Typography>
 
                      <Typography variant="subtitle1" color="primary">
-                       <b>Ending: </b>{props.end_date}
+                       <b>Start Time</b> : {props.start_time}
+                     </Typography>
+
+                     <Typography variant="subtitle1" color="primary">
+                       <b>End Time: </b>{props.end_time}
                      </Typography>
 
                      <Typography variant="subtitle1" color="textPrimary">
@@ -97,9 +102,9 @@ class EventDetails extends React.Component {
                        <b>Venue :</b> {props.venue}
                      </Typography>
 
-                      <Typography component="p" color="textSecondary">
+                      <Typography component="p" color="textPrimary">
 
-                        <i>Description</i>: <i>{props.description}</i>
+                        <b>Description</b>: <i>{props.description}</i>
                       </Typography>
 
                     </CardContent>
