@@ -26,7 +26,6 @@ const EventsMapComponent = compose(
         key={index}
         />
       ))}
-    }
   </GoogleMap>
 );
 

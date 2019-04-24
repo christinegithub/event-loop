@@ -25,9 +25,6 @@ class EventDetails extends React.Component {
         end_date: undefined,
         venue: undefined,
         image_url: undefined,
-        lat: undefined,
-        long: undefined,
-
       }
     };
   }
@@ -51,9 +48,7 @@ class EventDetails extends React.Component {
             end_date: data.end_date_time,
             venue: data.venue_name,
             image_url: data.image_url + "?width=1280&height=720",
-            lat: data.location.latitude,
-            long: data.location.longitude,
-            eventLocations: [{ lat: 43.6475, lng: -79.38702 },{ lat: 43.656804, lng: -79.409055 }],
+            eventLocations: [{ lat: parseFloat(data.location.latitude), lng: parseFloat(data.location.longitude)}],
           },
           isLoading: false,
         })
@@ -68,6 +63,7 @@ class EventDetails extends React.Component {
     return(
         <div>
             { props.id ? (
+
               <Card style={{width: '50%', 'padding-left': '25%' }}>
 
                 <CardMedia
@@ -75,11 +71,14 @@ class EventDetails extends React.Component {
                   height="360"     // as an example I am modifying width and height
                   width="640"
                   style={{background: 'cover'}}
+
                   image={props.image_url}
                 />
                    <CardContent>
                      <Typography variant="title" color="textPrimary">
+
                        <b>{props.title}</b>
+
                      </Typography>
 
                      <Typography variant="subtitle1" color="primary">
@@ -99,6 +98,7 @@ class EventDetails extends React.Component {
                      </Typography>
 
                       <Typography component="p" color="textSecondary">
+
                         <i>Description</i>: <i>{props.description}</i>
                       </Typography>
 

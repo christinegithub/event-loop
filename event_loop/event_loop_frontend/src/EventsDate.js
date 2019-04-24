@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 
 function truncateString(str, num) {
@@ -30,7 +31,7 @@ class EventsDate extends Component {
             <p>Date: {event.date}</p>
             <p>Start Time: {event.start_time}</p>
             <p>End Time: {event.end_time}</p>
-            <p><a href="{% url 'event_show' id=event.pk %}"> See Details</a></p>
+            <p><Link to={`events/${event.id}`}>See Details</Link></p>
             </div>
           </li>
 
@@ -43,5 +44,5 @@ class EventsDate extends Component {
     );
   }
 }
-
+// change <Link to={`events/${event.id}`}>See Details</Link> to blogtoid
 export default EventsDate;

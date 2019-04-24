@@ -55,7 +55,7 @@ class EventsList extends Component {
 
   async componentDidMount(pageNumber) {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/');
+      const response = await fetch('http://127.0.0.1:8000/api/events/');
       const events = await response.json();
       this.setState({
         events,
