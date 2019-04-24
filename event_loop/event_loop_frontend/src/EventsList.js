@@ -58,7 +58,7 @@ class EventsList extends Component {
        divisible_events,
        activePage: pageNumber
      });
-     this.props.undateMap(divisible_events);
+     this.props.updateMap(divisible_events);
    }
 
 
