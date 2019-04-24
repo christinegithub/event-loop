@@ -44,6 +44,7 @@ class EventsList extends Component {
       divisible_events: events,
       activePage: pageNumber
     });
+    this.props.updateMap(events);
   }
 
   handleDateChange(date) {
@@ -57,13 +58,13 @@ class EventsList extends Component {
        divisible_events,
        activePage: pageNumber
      });
+     this.props.undateMap(divisible_events);
    }
 
 
   async componentDidMount(pageNumber) {
     try {
-
-      const response = await fetch('http://127.0.0.1:8000/api/');
+      const response = await fetch('http://127.0.0.1:8000/api/events/');
       const events = await response.json();
 
       this.setState({

@@ -1,7 +1,8 @@
 import React from "react";
 import dotenv from 'dotenv';
-import { compose, withProps } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { compose, withProps, withStateHandlers } from "recompose";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
+import MapMarker from './MapMarker';
 
 dotenv.config();
 
@@ -15,18 +16,18 @@ const EventsMapComponent = compose(
   withScriptjs,
   withGoogleMap)((props) =>
   <GoogleMap
-    defaultZoom={14}
+    zoom={14}
     center={{ lat: props.currentLat, lng: props.currentLng }}
   >
-    {props.isMarkerShown &&
-      props.events.map((event, index) => (
-        <Marker
-        position={{ lat: event.lat, lng: event.lng }}
-        onClick={props.onMarkerClick}
-        key={index}
-        />
-      ))}
-    }
+    {props.events.map((event, index) => (
+      Boolean(event.location.latitude) && Boolean(event.location.longitude) ?
+      <MapMarker
+        index={index}
+        event={event}
+        location={{lat: event.location.latitude, lng: event.location.longitude}}
+      />
+       : null
+    ))}
   </GoogleMap>
 );
 

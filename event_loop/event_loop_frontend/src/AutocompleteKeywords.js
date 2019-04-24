@@ -1,6 +1,7 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const interests = [];
 
@@ -39,7 +40,8 @@ class Example extends React.Component {
 
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      events: []
     };
   }
 
@@ -61,6 +63,18 @@ class Example extends React.Component {
     });
   };
 
+  handleClick = () => {
+    axios.get('http://localhost:8000/api/keywords/' + this.state.value + '/')
+    .then((response) => {
+      this.setState({
+        events: response.data.events
+      })
+    }).catch(function(error) {
+      console.log(error);
+  });
+  }
+
+
   render() {
     const { value, suggestions } = this.state;
 
@@ -71,14 +85,34 @@ class Example extends React.Component {
     };
 
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
+      <React.Fragment>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
+        <button onClick={this.handleClick}>Submit</button>
+
+        <ul>
+        {this.state.events.map(event => (
+
+          <li class="each-event">
+            <div key={event.id}>
+            <h1>{event.title}</h1>
+            <p>Date: {event.date}</p>
+            <p>Start Time: {event.start_time}</p>
+            <p>End Time: {event.end_time}</p>
+            <p><Link to={`events/${event.id}`}>See Details</Link></p>
+            </div>
+          </li>
+
+          ))}
+        </ul>
+        
+      </React.Fragment>
     );
   }
 }

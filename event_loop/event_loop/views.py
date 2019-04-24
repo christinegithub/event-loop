@@ -22,9 +22,11 @@ import os
 from rest_framework import generics
 
 from event_loop.models import Location, Event, Keyword, Profile
-from event_loop.serializers import EventSerializer, KeywordSerializer
+from event_loop.serializers import EventSerializer, LocationSerializer, KeywordSerializer
 from event_loop.tasks import get_events
 from rake_nltk import Rake
+
+from datetime import date
 
 
 def root(request):
@@ -38,67 +40,96 @@ class DetailEvent(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
+class ListLocation(generics.ListCreateAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
+
+class DetailLocation(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
+
 class ListKeyword(generics.ListCreateAPIView):
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer
 
-def home_page(request):
+class DetailKeyword(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Keyword.objects.all()
+    serializer_class = KeywordSerializer
+    lookup_field = 'word'
 
+def home_page(request):
+    # get the json with events for a specific date
     bundle_type = 'medium'
-    date = '2019-04-23'
+    today = date.today().strftime('%Y-%m-%d')
     limit = 9999
     offset = 0
     status = 'ongoing'
-    event_response = requests.get(f"https://www.blogto.com/api/v2/events/?bundle_type={bundle_type}&date={date}&limit={limit}&offset={offset}&status={status}")
+    event_list_json = requests.get(f"https://www.blogto.com/api/v2/events/?bundle_type={bundle_type}&date={today}&limit={limit}&offset={offset}&status={status}")
 
-    event_body = json.loads(event_response.content)
+    # convert json received into a python dictionary
+    event_list = json.loads(event_list_json.content)
+    print(event_list)
 
-    GOOGLE_MAPS_KEY = os.environ.get("GOOGLE_MAPS_KEY")
-
-# `    # for event in event_body["results"]:
-#     #     each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
-#     #     try:
-#     #         Event.objects.get_or_create(
-#     #             title = event["title"],
-#     #             description = event["description_stripped"],
-#     #             date = date,
-#     #             image_url = event["image_url"] + "?width=120&height=120",
-#     #             start_time = event["start_time"],
-#     #             end_time = event["end_time"],
-#     #             blogto_id = event["id"])
-#     #     except Event.MultipleObjectsReturned:
-#              print("Duplicate event Id: " + str(event["id"]))`
-
-    for event in event_body["results"]:
-        # each_event = requests.get(f"https://www.blogto.com/api/v2/events/{event['id']}")
-        try:
-            Event.objects.get_or_create(
-                title = event["title"],
-                description = event["description_stripped"],
-                date = date,
-                image_url = event["image_url"] + "?width=600&height=600",
-                start_time = event["start_time"],
-                end_time = event["end_time"],
-                blogto_id = event["id"],
-                venue_name = event["venue_name"])
-        except Event.MultipleObjectsReturned:
-            print("Duplicate event Id: " + str(event["id"]))
-
-    # looping through events, creating a list of keywords, looping through keywords to create keyword object for each
-    # only if word has not been previously created
     r = Rake(min_length=1, max_length=1)
 
-    for event in event_body["results"]:
-        r.extract_keywords_from_text(event["description_stripped"])
+    for event_summary in event_list["results"]:
+        event_full_json = requests.get(f"https://www.blogto.com/api/v2/events/{event_summary['id']}")
+        event_full = json.loads(event_full_json.content)
+        print(event_full['title'])
+
+        r.extract_keywords_from_text(event_full["title"])
         word_list = r.get_ranked_phrases()
 
-        for word in word_list:
-            try:
-                Keyword.objects.get_or_create(
-                    word = word
+        try:
+            if event_full["location"]:
+                location, location_created = Location.objects.get_or_create(
+                latitude = event_full["location"]["latitude"],
+                longitude = event_full["location"]["longitude"],
+                defaults = {
+                    'address': event_full['address'],
+                    'city': event_full['city'],
+                    'province': event_full['province']
+                }
                 )
-            except Keyword.MultipleObjectsReturned:
-                print("Duplicate keyword")
+            else:
+                location, location_created = Location.objects.get_or_create(
+                latitude = None,
+                longitude = None,
+                city = event_full['city'],
+                defaults = {
+                    'address': event_full['address'],
+                    'province': event_full['province']
+                }
+                )
+        except Event.MultipleObjectsReturned:
+                print("Duplicate location: " + str(event_full["location"]))
+        try:
+            event_object, event_created = Event.objects.get_or_create(
+            blogto_id = event_full["id"],
+            date = today,
+            defaults = {
+                'title': event_full["title"],
+                'description': event_full["description_stripped"],
+                'image_url': event_full["image_url"] + "?width=600&height=600",
+                'start_time': event_summary["start_time"],
+                'end_time': event_summary["end_time"],
+                'venue_name': event_full["venue_name"],
+                'location': location
+            }
+            )
+            # looping through events, creating a list of keywords, looping through keywords to create keyword object for each
+            # only if word has not been previously created
+            for word in word_list:
+                try:
+                    kword, kword_created = Keyword.objects.get_or_create(
+                        word = word
+                    )
+                    event_object.keywords.add(kword)
+                    print(word)
+                except Keyword.MultipleObjectsReturned:
+                    print("Duplicate keyword")
+        except Event.MultipleObjectsReturned:
+            print("Duplicate event Id: " + str(event_full["id"]))
 
     events = Event.objects.all().order_by("id").reverse()
     paginator = Paginator(events, 10) # Shows only 10 records per page
@@ -112,7 +143,7 @@ def home_page(request):
     except EmptyPage:
     # If page is out of range (e.g. 7777), deliver last page of results.
         events = paginator.page(paginator.num_pages)
-    context = {'events': events, 'GOOGLE_MAPS_KEY': GOOGLE_MAPS_KEY}
+    context = {'events': events}
     response = render(request, 'home_page.html', context)
     return HttpResponse(response)
 
