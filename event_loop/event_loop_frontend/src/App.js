@@ -51,16 +51,6 @@ class Home extends React.Component {
     };
     this.updateEventsOnMap = this.updateEventsOnMap.bind(this);
   }
-
-  async componentDidMount () {
-    const events_response = await fetch('http://127.0.0.1:8000/api/events/');
-    let events = await events_response.json();
-    events = events.slice(0, 10);
-    this.setState({
-      events,
-    });
-  }
-
   updateEventsOnMap(events) {
     this.setState({
       events,
