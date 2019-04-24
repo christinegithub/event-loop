@@ -5,14 +5,12 @@ class EventsMapView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isMarkerShown: false,
       currentLat: 43.6532,
       currentLng: -79.3832,
     }
   }
 
   componentDidMount() {
-    this.delayedShowMarker();
     this.setMyLocation();
   }
 
@@ -21,7 +19,6 @@ class EventsMapView extends React.PureComponent {
     console.log('Current location found!');
     console.log('New current lat: ', this.state.currentLat);
     console.log('New currnet lng: ', this.state.currentLng);
-    console.log(this.props.eventLocations);
   }
 }
 
@@ -35,17 +32,6 @@ class EventsMapView extends React.PureComponent {
     );
   }
 
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({ isMarkerShown: true })
-    }, 500)
-  }
-
-  handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false })
-    this.delayedShowMarker()
-  }
-
   render() {
     return (
       <EventsMapComponent
@@ -53,7 +39,7 @@ class EventsMapView extends React.PureComponent {
         onMarkerClick={this.handleMarkerClick}
         currentLat={this.state.currentLat}
         currentLng={this.state.currentLng}
-        events={this.props.eventLocations}
+        events={this.props.events}
       />
     )
   }

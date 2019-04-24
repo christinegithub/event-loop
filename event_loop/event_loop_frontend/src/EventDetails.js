@@ -1,26 +1,14 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import red from '@material-ui/core/colors/red';
 import CardHeader from '@material-ui/core/CardHeader';
 import EventsMapView from './EventsMapView';
 
 
-const styles = {
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    // ⚠️ object-fit is not supported by IE 11.
-    objectFit: 'cover',
-  },
-};
 
-export default class EventDetails extends React.Component {
+class EventDetails extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
@@ -47,20 +35,21 @@ export default class EventDetails extends React.Component {
   }
 
   fetchDetails(id) {
-    fetch('https://www.blogto.com/api/v2/events/' + id + "/")
+    fetch('http://127.0.0.1:8000/api/events/' + id + "/")
     .then(response => response.json())
     .then( data => this.setState({
           event: {
             id: data.id,
             title: data.title,
-            description: data.description_stripped,
-            address: data.address,
-            city: data.city,
-            start_date: data.start_date_time,
-            end_date: data.end_date_time,
+            description: data.description,
+            address: data.location.address,
+            city: data.location.city,
+            date: data.date,
+            start_time: data.start_time,
+            end_time: data.end_time,
             venue: data.venue_name,
-            image_url: data.image_url + "?width=1280&height=720",
-            eventLocations: [{ lat: parseFloat(data.location.latitude), lng: parseFloat(data.location.longitude)}],
+            image_url: data.image_url,
+            location: { latitude: parseFloat(data.location.latitude), longitude: parseFloat(data.location.longitude)},
           },
           isLoading: false,
         })
@@ -75,37 +64,52 @@ export default class EventDetails extends React.Component {
     return(
         <div>
             { props.id ? (
-              <Card style={{maxWidth: 640}, {backgroundColor: "lightGrey"}}>
+
+              <Card style={{width: '50%', 'padding-left': '25%' }}>
+
                 <CardMedia
                   component="img"
-                  alt= {props.title}
-                  height="360"
-                  width="10%"
+                  height="360"     // as an example I am modifying width and height
+                  width="640"
+                  style={{background: 'cover'}}
+
                   image={props.image_url}
                 />
                    <CardContent>
                      <Typography variant="title" color="textPrimary">
-                       <h2><b>{props.title}</b></h2>
+
+                       <b>{props.title}</b>
 
                      </Typography>
+
                      <Typography variant="subtitle1" color="primary">
-                       <b>Starting</b> : {props.start_date}
+                       <b>Date</b> : {props.date}
                      </Typography>
+
                      <Typography variant="subtitle1" color="primary">
-                       <b>Ending: </b>{props.end_date}
+                       <b>Start Time</b> : {props.start_time}
                      </Typography>
+
+                     <Typography variant="subtitle1" color="primary">
+                       <b>End Time: </b>{props.end_time}
+                     </Typography>
+
                      <Typography variant="subtitle1" color="textPrimary">
                        <b>Address</b>: {props.address + "," + props.city}
                      </Typography>
+
                      <Typography variant="subtitle1" color="textPrimary">
                        <b>Venue :</b> {props.venue}
                      </Typography>
 
-                      <Typography component="p" color="textSecondary">
-                        <h3><b>Description</b>: <i>{props.description}</i></h3>
+                      <Typography component="p" color="textPrimary">
+
+                        <b>Description</b>: <i>{props.description}</i>
                       </Typography>
+
                     </CardContent>
-                    <EventsMapView eventLocations={props.eventLocations} />
+                    <EventsMapView events={[this.state.event]} />
+
 
                 </Card>
             ) : null}
@@ -115,3 +119,5 @@ export default class EventDetails extends React.Component {
     return EventRender(this.state.event);
   }
 }
+
+export default EventDetails;

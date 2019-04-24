@@ -47,9 +47,26 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventLocations: [{ lat: 43.6475, lng: -79.38702 }, { lat: 43.656804, lng: -79.409055 }],
-    }
+      events: [],
+    };
+    this.updateEventsOnMap = this.updateEventsOnMap.bind(this);
   }
+
+  async componentDidMount () {
+    const events_response = await fetch('http://127.0.0.1:8000/api/events/');
+    let events = await events_response.json();
+    events = events.slice(0, 10);
+    this.setState({
+      events,
+    });
+  }
+
+  updateEventsOnMap(events) {
+    this.setState({
+      events,
+    });
+  }
+
   render () {
     return (
       <div>
@@ -60,8 +77,8 @@ class Home extends React.Component {
           </li>
         </ul>
         <div className="grid-container">
-        <EventsList />
-        <EventsMapView eventLocations={this.state.eventLocations} />
+        <EventsList updateMap={this.updateEventsOnMap} />
+        <EventsMapView events={this.state.events} />
         </div>
         <h2>Filter Events based on your Interests</h2>
         <Autosuggest />
