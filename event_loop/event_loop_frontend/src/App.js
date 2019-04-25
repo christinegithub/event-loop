@@ -15,18 +15,21 @@ import avatar4 from './img/myles.png';
 function App() {
   return (
     <Router>
-      <img class="logo" src={logo} alt="Logo"/>
-      <div >
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
+      <div className="site-nav">
+        <ul className="site-nav-list">
+          <li className="site-nav-item">
+            <img class="logo" src={logo} alt="Logo"/>
           </li>
-          <li>
-            <Link to="/about">About</Link>
+          <li className="site-nav-item">
+            <h1 className="site-name">Event Loop</h1>
+          </li>
+          <li className="site-nav-item link">
+            <Link className="nav-link" to="/">Home</Link>
+          </li>
+          <li className="site-nav-item link">
+            <Link className="nav-link" to="/about">About</Link>
           </li>
         </ul>
-
-        <hr />
 
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
@@ -98,7 +101,6 @@ class About extends React.Component {
       <li>Myles Bennett</li>
       </ul>
       <p>©Bitmaker 2019</p></footer>
-
       </div>
     );
   }
@@ -140,15 +142,7 @@ class Home extends React.Component {
         </div>
         <h2 className="autosuggest-title">Filter Events based on your Interests</h2>
         <Autosuggest />
-        <footer>
-        <ul className="footer-list">
-        <li>Created by:</li>
-        <li>Christine Lee</li>
-        <li>Farjana Nipa</li>
-        <li>Anton Moiseev</li>
-        <li>Myles Bennett</li>
-        </ul>
-        <p>©Bitmaker 2019</p></footer>
+        <footer>©Bitmaker 2019</footer>
         <Route
           exact
           path={this.props.match.path}
