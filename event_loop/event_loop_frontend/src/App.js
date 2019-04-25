@@ -10,6 +10,7 @@ import logo from './img/EventLoopLogo.png';
 import avatar1 from './img/christine.png';
 import avatar2 from './img/Farjana.png';
 import avatar3 from './img/Anton.png';
+import avatar4 from './img/myles.png';
 
 function App() {
   return (
@@ -45,11 +46,61 @@ class About extends React.Component {
   render () {
     return (
       <div>
-        <h2>The team</h2>
-        <img class="avatar" src={avatar1} />
-        <img class="avatar" src={avatar2} />
-        <img class="avatar" src={avatar3} />
-        <h3>Contact Us</h3>
+      <h2><u>The team</u></h2>
+      <figure class="avatar">
+        <img class="avatar-image" src={avatar1} />
+        <figcaption class="avatar-name"> Christine Lee </figcaption>
+      </figure>
+      <figure class="avatar">
+        <img class="avatar-image" src={avatar2} />
+        <figcaption class="avatar-name"> Farjana Nipa </figcaption>
+      </figure>
+      <figure class="avatar">
+        <img class="avatar-image" src={avatar3} />
+        <figcaption class="avatar-name"> Anton Moiseev </figcaption>
+      </figure>
+      <figure class="avatar">
+        <img class="avatar-image" src={avatar4} />
+        <figcaption class="avatar-name"> Myles Bennett </figcaption>
+      </figure>
+
+      <br />
+      <br />
+      <h2><u>Contact Us</u></h2>
+
+      <div class="contact-us">
+
+      <div class="contact">
+        <h3>Christine Lee</h3>
+        <p>christine13@gmail.com</p>
+        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+      </div>
+      <div class="contact">
+        <h3>Farjana Nipa</h3>
+        <p>nipa.farjana04@gmail.com</p>
+        <a href="https://www.linkedin.com/in/farjana-yasmin-nipa-6767a0169/">Visit my LinkedIn profile!</a>
+      </div>
+      <div class="contact">
+        <h3>Anton Moiseev</h3>
+        <p>christine13@gmail.com</p>
+        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+      </div>
+      <div class="contact">
+        <h3>Myles Bennett</h3>
+        <p>christine13@gmail.com</p>
+        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+      </div>
+
+      </div>
+      <footer>
+      <ul className="footer-list">
+      <li>Created by:</li>
+      <li>Christine Lee</li>
+      <li>Farjana Nipa</li>
+      <li>Anton Moiseev</li>
+      <li>Myles Bennett</li>
+      </ul>
+      <p>©Bitmaker 2019</p></footer>
       </div>
     );
   }

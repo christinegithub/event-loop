@@ -203,8 +203,24 @@ footer {
 }
 
 .avatar {
-  width: 150px;
-  height: 150px;
+position: relative;
+display: inline-block;
+margin-right: 10px;
+}
+
+.avatar-image {
+width: 150px;
+height: 150px;
+}
+
+.avatar-name {
+position: absolute;
+width: 100%;
+text-align: center;
+}
+
+.contact-us {
+  display: inline-block;
   margin-left: 20px;
 }
 
@@ -264,6 +280,10 @@ footer {
 
 .link:last-child {
   margin-left: 10px;
+  
+.contact {
+  border: solid gray 1px;
+  padding: 20px;
 }
 
 /* width */
