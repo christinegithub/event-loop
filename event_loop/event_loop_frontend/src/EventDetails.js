@@ -112,7 +112,8 @@ class EventDetails extends React.Component {
                         </CardContent>
                         <EventsMapView
                           events={[this.state.event]}
-                          zoom={10}
+                          zoom={15}
+                          isDetailMap={true}
                         />
                     </Card>
                   </Grid>

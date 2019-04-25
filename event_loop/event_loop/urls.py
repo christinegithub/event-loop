@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/locations/<int:pk>/', views.DetailLocation.as_view()),
     path('api/keywords/', views.ListKeyword.as_view()),
     path('api/keywords/<str:word>/', views.DetailKeyword.as_view()),
+    path('db/load/<str:date>', views.load_events_for_date, name="load_events"),
 
     path('admin/', admin.site.urls),
     path('', views.root),
