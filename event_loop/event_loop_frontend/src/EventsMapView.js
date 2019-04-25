@@ -23,13 +23,22 @@ class EventsMapView extends React.PureComponent {
 }
 
   setMyLocation() {
-    navigator.geolocation.getCurrentPosition(position => {
-      this.setState(
-        {currentLat: position.coords.latitude, currentLng: position.coords.longitude}
+    if (!this.props.isDetailMap) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.setState(
+          {currentLat: position.coords.latitude, currentLng: position.coords.longitude}
+        );
+        },
+        error => console.log(error)
       );
-      },
-      error => console.log(error)
-    );
+    } else {
+      this.setState(
+        {
+          currentLat: Boolean(this.props.events[0].location.latitude) ? this.props.events[0].location.latitude : 43.6532,
+          currentLng: Boolean(this.props.events[0].location.longitude) ? this.props.events[0].location.longitude : -79.3832
+        }
+      );
+    }
   }
 
   render() {

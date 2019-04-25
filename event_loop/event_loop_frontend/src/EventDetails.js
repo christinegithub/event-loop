@@ -108,7 +108,7 @@ class EventDetails extends React.Component {
                       </Typography>
 
                     </CardContent>
-                    <EventsMapView events={[this.state.event]} />
+                    <EventsMapView events={[this.state.event]} isDetailMap={true} />
 
 
                 </Card>

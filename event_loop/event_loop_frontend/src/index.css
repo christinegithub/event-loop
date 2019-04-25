@@ -18,4 +18,18 @@ code {
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
   margin: 10px;
+  align-items: center;
+}
+
+.map-container {
+  height: 500px;
+}
+
+.map-loading-element, .map-element {
+  height: 100%;
+}
+
+.map-element {
+  border-radius: 15px;
+  max-width: 100%;
 }
