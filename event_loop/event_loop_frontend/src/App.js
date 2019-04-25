@@ -9,22 +9,26 @@ import Autosuggest from './AutocompleteKeywords';
 import logo from './img/EventLoopLogo.png';
 import avatar1 from './img/christine.png';
 import avatar2 from './img/Farjana.png';
+import avatar3 from './img/Anton.png';
 
 function App() {
   return (
     <Router>
-      <img class="logo" src={logo} alt="Logo"/>
-      <div >
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
+      <div className="site-nav">
+        <ul className="site-nav-list">
+          <li className="site-nav-item">
+            <img class="logo" src={logo} alt="Logo"/>
           </li>
-          <li>
-            <Link to="/about">About</Link>
+          <li className="site-nav-item">
+            <h1 className="site-name">Event Loop</h1>
+          </li>
+          <li className="site-nav-item link">
+            <Link className="nav-link" to="/">Home</Link>
+          </li>
+          <li className="site-nav-item link">
+            <Link className="nav-link" to="/about">About</Link>
           </li>
         </ul>
-
-        <hr />
 
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
@@ -44,7 +48,7 @@ class About extends React.Component {
         <h2>The team</h2>
         <img class="avatar" src={avatar1} />
         <img class="avatar" src={avatar2} />
-
+        <img class="avatar" src={avatar3} />
         <h3>Contact Us</h3>
       </div>
     );
@@ -87,15 +91,7 @@ class Home extends React.Component {
         </div>
         <h2 className="autosuggest-title">Filter Events based on your Interests</h2>
         <Autosuggest />
-        <footer>
-        <ul className="footer-list">
-        <li>Created by:</li>
-        <li>Christine Lee</li>
-        <li>Farjana Nipa</li>
-        <li>Anton Moiseev</li>
-        <li>Myles Bennett</li>
-        </ul>
-        <p>©Bitmaker 2019</p></footer>
+        <footer>©Bitmaker 2019</footer>
         <Route
           exact
           path={this.props.match.path}

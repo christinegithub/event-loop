@@ -4,10 +4,12 @@ body, * {
 
 body{
   background-color: #C2E1C2;
+  font-family: 'Nunito', sans-serif;
 }
 
 .App {
   text-align: center;
+  font-family: 'Nunito', sans-serif;
 }
 
 .App-logo {
@@ -76,7 +78,6 @@ body{
   width: 240px;
   height: 30px;
   padding: 10px 20px;
-  font-family: Helvetica, sans-serif;
   font-weight: 300;
   font-size: 16px;
   border: 1px solid #aaa;
@@ -109,7 +110,6 @@ body{
   width: 280px;
   border: 1px solid #aaa;
   background-color: #fff;
-  font-family: Helvetica, sans-serif;
   font-weight: 300;
   font-size: 16px;
   border-bottom-left-radius: 4px;
@@ -180,24 +180,11 @@ body{
 }
 
 footer {
-  background-color: #778472;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.footer-list > li {
-  list-style: none;
-  font-size: 0.75em;
-  margin: 0;
-}
-
-footer > p {
-  font-size: 0.75em;
+  background-color: #0d7a78;
   text-align: center;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0;
-  margin-top: 50px;
+  font-size: 20px;
+  color: white;
+  padding: 20px;
 }
 
 .datepicker:hover {
@@ -211,7 +198,7 @@ footer > p {
 }
 
 .logo {
-  width: 150px;
+  width: 70px;
   height: 70px;
 }
 
@@ -219,6 +206,64 @@ footer > p {
   width: 150px;
   height: 150px;
   margin-left: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin: 10px;
+  align-items: center;
+}
+
+.map-container {
+  height: 500px;
+}
+
+.map-loading-element, .map-element {
+  height: 100%;
+}
+
+.map-element {
+  border-radius: 15px;
+  max-width: 100%;
+}
+
+.site-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: solid 3px #a3f77c;
+  background-color: #0d7a78;
+}
+
+.site-nav-item {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.site-name {
+  color: #a3f77c;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #a3f77c;
+  font-size: 1.5em;
+}
+
+.link {
+  margin-left: 30px;
+}
+
+.link:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.link:last-child {
+  margin-left: 10px;
 }
 
 /* width */
@@ -236,9 +281,4 @@ footer > p {
 ::-webkit-scrollbar-thumb {
   background: #BAC7BE;
   border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
 }
