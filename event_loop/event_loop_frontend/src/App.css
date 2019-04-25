@@ -232,6 +232,16 @@ width: 100%;
 text-align: center;
 }
 
+.contact-us {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.contact {
+  border: solid gray 1px;
+  padding: 20px;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

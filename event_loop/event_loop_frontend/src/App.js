@@ -43,7 +43,7 @@ class About extends React.Component {
   render () {
     return (
       <div>
-      <h2>The team</h2>
+      <h2><u>The team</u></h2>
       <figure class="avatar">
         <img class="avatar-image" src={avatar1} />
         <figcaption class="avatar-name"> Christine Lee </figcaption>
@@ -61,7 +61,44 @@ class About extends React.Component {
         <figcaption class="avatar-name"> Myles Bennett </figcaption>
       </figure>
 
-        <h2>Contact Us</h2>
+      <br />
+      <br />
+      <h2><u>Contact Us</u></h2>
+
+      <div class="contact-us">
+
+      <div class="contact">
+        <h3>Christine Lee</h3>
+        <p>christine13@gmail.com</p>
+        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+      </div>
+      <div class="contact">
+        <h3>Farjana Nipa</h3>
+        <p>nipa.farjana04@gmail.com</p>
+        <a href="https://www.linkedin.com/in/farjana-yasmin-nipa-6767a0169/">Visit my LinkedIn profile!</a>
+      </div>
+      <div class="contact">
+        <h3>Anton Moiseev</h3>
+        <p>christine13@gmail.com</p>
+        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+      </div>
+      <div class="contact">
+        <h3>Myles Bennett</h3>
+        <p>christine13@gmail.com</p>
+        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+      </div>
+
+      </div>
+      <footer>
+      <ul className="footer-list">
+      <li>Created by:</li>
+      <li>Christine Lee</li>
+      <li>Farjana Nipa</li>
+      <li>Anton Moiseev</li>
+      <li>Myles Bennett</li>
+      </ul>
+      <p>©Bitmaker 2019</p></footer>
+
       </div>
     );
   }
