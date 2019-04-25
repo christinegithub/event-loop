@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { compose, withProps, withStateHandlers } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
 import MapMarker from './MapMarker';
-import { ULTRALIGHT, CLEANCUT, GRAYSCALE } from './MapStyles';
+import { ULTRALIGHT, CLEANCUT, GRAYSCALE, AVOCADO } from './MapStyles';
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ const EventsMapComponent = compose(
     zoom={14}
     center={{ lat: props.currentLat, lng: props.currentLng }}
     defaultOptions={{
-                styles: GRAYSCALE,
+                styles: AVOCADO,
             }}
   >
     {props.events.map((event, index) => (

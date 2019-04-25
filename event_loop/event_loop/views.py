@@ -58,13 +58,29 @@ class DetailKeyword(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'word'
 
 def home_page(request):
+    events = Event.objects.all().order_by("id").reverse()
+    paginator = Paginator(events, 10) # Shows only 10 records per page
+
+    page = request.GET.get('page')
+    try:
+        events = paginator.page(page)
+    except PageNotAnInteger:
+    # If page is not an integer, deliver first page.
+        events = paginator.page(1)
+    except EmptyPage:
+    # If page is out of range (e.g. 7777), deliver last page of results.
+        events = paginator.page(paginator.num_pages)
+    context = {'events': events}
+    response = render(request, 'home_page.html', context)
+    return HttpResponse(response)
+
+def load_events_for_date(request, date):
     # get the json with events for a specific date
     bundle_type = 'medium'
-    today = date.today().strftime('%Y-%m-%d')
     limit = 9999
     offset = 0
     status = 'ongoing'
-    event_list_json = requests.get(f"https://www.blogto.com/api/v2/events/?bundle_type={bundle_type}&date={today}&limit={limit}&offset={offset}&status={status}")
+    event_list_json = requests.get(f"https://www.blogto.com/api/v2/events/?bundle_type={bundle_type}&date={date}&limit={limit}&offset={offset}&status={status}")
 
     # convert json received into a python dictionary
     event_list = json.loads(event_list_json.content)
@@ -75,7 +91,7 @@ def home_page(request):
     for event_summary in event_list["results"]:
         event_full_json = requests.get(f"https://www.blogto.com/api/v2/events/{event_summary['id']}")
         event_full = json.loads(event_full_json.content)
-        print(event_full['title'])
+        print(">>> Event Title:", event_full['title'], "<<<")
 
         r.extract_keywords_from_text(event_full["title"])
         word_list = r.get_ranked_phrases()
@@ -106,7 +122,7 @@ def home_page(request):
         try:
             event_object, event_created = Event.objects.get_or_create(
             blogto_id = event_full["id"],
-            date = today,
+            date = date,
             defaults = {
                 'title': event_full["title"],
                 'description': event_full["description_stripped"],
@@ -119,6 +135,7 @@ def home_page(request):
             )
             # looping through events, creating a list of keywords, looping through keywords to create keyword object for each
             # only if word has not been previously created
+            print("List of keywords:")
             for word in word_list:
                 try:
                     kword, kword_created = Keyword.objects.get_or_create(
@@ -131,22 +148,7 @@ def home_page(request):
         except Event.MultipleObjectsReturned:
             print("Duplicate event Id: " + str(event_full["id"]))
 
-    events = Event.objects.all().order_by("id").reverse()
-    paginator = Paginator(events, 10) # Shows only 10 records per page
-
-    page = request.GET.get('page')
-    try:
-        events = paginator.page(page)
-    except PageNotAnInteger:
-    # If page is not an integer, deliver first page.
-        events = paginator.page(1)
-    except EmptyPage:
-    # If page is out of range (e.g. 7777), deliver last page of results.
-        events = paginator.page(paginator.num_pages)
-    context = {'events': events}
-    response = render(request, 'home_page.html', context)
-    return HttpResponse(response)
-
+    return HttpResponse(f"Loaded events into db for {date}.")
 
 
 def events(request):
