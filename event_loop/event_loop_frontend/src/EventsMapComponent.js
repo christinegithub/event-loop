@@ -18,7 +18,7 @@ const EventsMapComponent = compose(
   withScriptjs,
   withGoogleMap)((props) =>
   <GoogleMap
-    zoom={14}
+    zoom={props.zoom}
     center={{ lat: props.currentLat, lng: props.currentLng }}
     defaultOptions={{
                 styles: AVOCADO,

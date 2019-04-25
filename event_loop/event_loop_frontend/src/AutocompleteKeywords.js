@@ -86,15 +86,17 @@ class Example extends React.Component {
 
     return (
       <React.Fragment>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-        />
-        <button onClick={this.handleClick}>Submit</button>
+        <div className="input-wrapper">
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={inputProps}
+          />
+          <button className="suggest-button" onClick={this.handleClick}>Submit</button>
+        </div>
 
         <ul>
         {this.state.events.map(event => (
