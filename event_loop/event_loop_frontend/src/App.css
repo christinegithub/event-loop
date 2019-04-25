@@ -218,6 +218,7 @@ footer > p {
 .avatar {
   width: 150px;
   height: 150px;
+  margin-left: 20px;
 }
 
 /* width */

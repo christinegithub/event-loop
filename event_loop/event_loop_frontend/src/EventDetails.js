@@ -72,7 +72,7 @@ class EventDetails extends React.Component {
       return(
           <div>
               { props.id ? (
-                <Grid container justify="center" style={{ backgroundColor: '#f7f7f7' }}>
+                <Grid container justify="center" style={{ backgroundColor: '#C2E1C2' }}>
                   <Card className={classes.card}>
                     <CardMedia
                       component="img"
