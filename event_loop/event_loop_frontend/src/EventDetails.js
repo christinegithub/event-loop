@@ -7,10 +7,14 @@ import CardHeader from '@material-ui/core/CardHeader';
 import EventsMapView from './EventsMapView';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   card: {
     width: '50%',
+  },
+  progress: {
+    margin: theme.spacing.unit * 2,
   },
 });
 
@@ -36,8 +40,8 @@ class EventDetails extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     this.fetchDetails(this.props.match.params.id);
-
   }
 
   fetchDetails(id) {
