@@ -216,9 +216,20 @@ footer > p {
 }
 
 .avatar {
-  width: 150px;
-  height: 150px;
-  margin-left: 20px;
+position: relative;
+display: inline-block;
+margin-right: 10px;
+}
+
+.avatar-image {
+width: 150px;
+height: 150px;
+}
+
+.avatar-name {
+position: absolute;
+width: 100%;
+text-align: center;
 }
 
 /* width */

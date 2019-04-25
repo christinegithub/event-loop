@@ -9,6 +9,7 @@ import Autosuggest from './AutocompleteKeywords';
 import logo from './img/EventLoopLogo.png';
 import avatar1 from './img/christine.png';
 import avatar2 from './img/Farjana.png';
+import avatar3 from './img/Anton.png';
 import avatar4 from './img/myles.png';
 
 function App() {
@@ -42,12 +43,25 @@ class About extends React.Component {
   render () {
     return (
       <div>
-        <h2>The team</h2>
-        <img class="avatar" src={avatar1} />
-        <img class="avatar" src={avatar2} />
-        <img class="avatar" src={avatar4} />
+      <h2>The team</h2>
+      <figure class="avatar">
+        <img class="avatar-image" src={avatar1} />
+        <figcaption class="avatar-name"> Christine Lee </figcaption>
+      </figure>
+      <figure class="avatar">
+        <img class="avatar-image" src={avatar2} />
+        <figcaption class="avatar-name"> Farjana Nipa </figcaption>
+      </figure>
+      <figure class="avatar">
+        <img class="avatar-image" src={avatar3} />
+        <figcaption class="avatar-name"> Anton Moiseev </figcaption>
+      </figure>
+      <figure class="avatar">
+        <img class="avatar-image" src={avatar4} />
+        <figcaption class="avatar-name"> Myles Bennett </figcaption>
+      </figure>
 
-        <h3>Contact Us</h3>
+        <h2>Contact Us</h2>
       </div>
     );
   }
