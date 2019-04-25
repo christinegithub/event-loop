@@ -25,9 +25,8 @@ class EventsDate extends Component {
 
           <li class="each-event">
             <div key={event.id}>
-            <h1>{event.title}</h1>
+            <h2>{event.title}</h2>
             <p>{truncateString(event.description, 200)}</p>
-            <p>Date: {event.date}</p>
             <p>Start Time: {event.start_time}</p>
             <p>End Time: {event.end_time}</p>
             <p><Link to={`events/${event.id}`}>See Details</Link></p>
