@@ -1,3 +1,11 @@
+body, * {
+  box-sizing: content-box;
+}
+
+body{
+  background-color: #C2E1C2;
+}
+
 .App {
   text-align: center;
 }
@@ -73,6 +81,8 @@
 
 .react-autosuggest__container {
   position: relative;
+  display: inline-block;
+  margin-left: 450px;
 }
 
 .react-autosuggest__input--open {
@@ -141,4 +151,42 @@
   font-size: 20px;
   text-align: center;
   margin-top: 20px;
+}
+
+.suggest-button {
+  width: 100px;
+  height: 50px;
+  border-radius: 4px;
+  background: #7DCD85;
+  margin-left: 10px;
+  font-size: 15px;
+  color: #778472;
+  font-weight: bold;
+}
+
+.autosuggest-title {
+  color: #778472;
+  margin-left: 446px;
+  padding-top: 35px;
+}
+
+footer {
+  background-color: #778472;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.footer-list > li {
+  list-style: none;
+  font-size: 0.75em;
+  margin: 0;
+}
+
+footer > p {
+  font-size: 0.75em;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  margin-top: 50px;
 }

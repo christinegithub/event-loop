@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <div>
-        <ul>
+        <ul className="navbar">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -51,6 +51,16 @@ class Home extends React.Component {
     };
     this.updateEventsOnMap = this.updateEventsOnMap.bind(this);
   }
+
+  async componentDidMount () {
+    const events_response = await fetch('http://127.0.0.1:8000/api/events/');
+    let events = await events_response.json();
+    events = events.slice(0, 10);
+    this.setState({
+      events,
+    });
+  }
+
   updateEventsOnMap(events) {
     this.setState({
       events,
@@ -70,12 +80,20 @@ class Home extends React.Component {
         <EventsList updateMap={this.updateEventsOnMap} />
         <EventsMapView events={this.state.events} />
         </div>
-        <h2>Filter Events based on your Interests</h2>
+        <h2 className="autosuggest-title">Filter Events based on your Interests</h2>
         <Autosuggest />
+        <footer>
+        <ul className="footer-list">
+        <li>Created by:</li>
+        <li>Christine Lee</li>
+        <li>Farjana Nipa</li>
+        <li>Anton Moiseev</li>
+        <li>Myles Bennett</li>
+        </ul>
+        <p>©Bitmaker 2019</p></footer>
         <Route
           exact
           path={this.props.match.path}
-          render={() => <h3>Please select an event.</h3>}
         />
       </div>
     );
