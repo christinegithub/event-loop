@@ -8,6 +8,7 @@ import Autosuggest from './AutocompleteKeywords';
 
 import logo from './img/EventLoopLogo.png';
 import avatar1 from './img/christine.png';
+import avatar2 from './img/Farjana.png';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ class About extends React.Component {
       <div>
         <h2>The team</h2>
         <img class="avatar" src={avatar1} />
+        <img class="avatar" src={avatar2} />
 
         <h3>Contact Us</h3>
       </div>
