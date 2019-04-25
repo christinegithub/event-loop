@@ -40,6 +40,7 @@ class EventsMapView extends React.PureComponent {
         currentLat={this.state.currentLat}
         currentLng={this.state.currentLng}
         events={this.props.events}
+        zoom={this.props.zoom}
       />
     )
   }

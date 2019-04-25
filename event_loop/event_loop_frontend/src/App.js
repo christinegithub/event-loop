@@ -71,14 +71,12 @@ class Home extends React.Component {
     return (
       <div>
         <h2>Events</h2>
-        <ul>
-          <li>
-            <Link to={`events/134280`}>Event #1</Link>
-          </li>
-        </ul>
         <div className="grid-container">
         <EventsList updateMap={this.updateEventsOnMap} />
-        <EventsMapView events={this.state.events} />
+        <EventsMapView
+          events={this.state.events}
+          zoom={14} 
+        />
         </div>
         <h2 className="autosuggest-title">Filter Events based on your Interests</h2>
         <Autosuggest />
