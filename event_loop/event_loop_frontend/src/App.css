@@ -82,6 +82,7 @@ body{
   font-size: 16px;
   border: 1px solid #aaa;
   border-radius: 4px;
+  display: inline-block;
 }
 
 .react-autosuggest__input--focused {
@@ -91,7 +92,13 @@ body{
 .react-autosuggest__container {
   position: relative;
   display: inline-block;
-  margin-left: 450px;
+  margin-bottom: 90px;
+}
+
+.input-wrapper {
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
 }
 
 .react-autosuggest__input--open {
@@ -175,7 +182,7 @@ body{
 
 .autosuggest-title {
   color: #778472;
-  margin-left: 446px;
+  text-align: center;
   padding-top: 35px;
 }
 
@@ -185,6 +192,10 @@ footer {
   font-size: 20px;
   color: white;
   padding: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .datepicker:hover {
@@ -206,6 +217,7 @@ footer {
 position: relative;
 display: inline-block;
 margin-right: 10px;
+justify-content: center;
 }
 
 .avatar-image {
@@ -280,10 +292,19 @@ text-align: center;
 
 .link:last-child {
   margin-left: 10px;
-  
+}
+
+.contact-us-container {
+  text-align: center;
+  margin-bottom: 0;
+}
+
 .contact {
   border: solid gray 1px;
   padding: 20px;
+  display: inline-block;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 /* width */

@@ -86,7 +86,7 @@ class Example extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="input-wrapper">
+      <div className="input-wrapper">
           <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -113,7 +113,7 @@ class Example extends React.Component {
 
           ))}
         </ul>
-        
+
       </React.Fragment>
     );
   }

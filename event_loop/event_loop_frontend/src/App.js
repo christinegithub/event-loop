@@ -45,62 +45,38 @@ class About extends React.Component {
   }
   render () {
     return (
-      <div>
-      <h2><u>The team</u></h2>
-      <figure class="avatar">
-        <img class="avatar-image" src={avatar1} />
-        <figcaption class="avatar-name"> Christine Lee </figcaption>
-      </figure>
-      <figure class="avatar">
-        <img class="avatar-image" src={avatar2} />
-        <figcaption class="avatar-name"> Farjana Nipa </figcaption>
-      </figure>
-      <figure class="avatar">
-        <img class="avatar-image" src={avatar3} />
-        <figcaption class="avatar-name"> Anton Moiseev </figcaption>
-      </figure>
-      <figure class="avatar">
-        <img class="avatar-image" src={avatar4} />
-        <figcaption class="avatar-name"> Myles Bennett </figcaption>
-      </figure>
-
-      <br />
-      <br />
+      <div className="contact-us-container">
       <h2><u>Contact Us</u></h2>
 
       <div class="contact-us">
 
       <div class="contact">
+        <img class="avatar-image" src={avatar1} />
         <h3>Christine Lee</h3>
         <p>christine13@gmail.com</p>
-        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+        <a href="https://www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
       </div>
       <div class="contact">
+        <img class="avatar-image" src={avatar2} />
         <h3>Farjana Nipa</h3>
         <p>nipa.farjana04@gmail.com</p>
         <a href="https://www.linkedin.com/in/farjana-yasmin-nipa-6767a0169/">Visit my LinkedIn profile!</a>
       </div>
       <div class="contact">
+        <img class="avatar-image" src={avatar3} />
         <h3>Anton Moiseev</h3>
-        <p>christine13@gmail.com</p>
-        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+        <p>anton.mois33v@gmail.com</p>
+        <a href="https://www.linkedin.com/in/anton-moiseev/">Visit my LinkedIn profile!</a>
       </div>
       <div class="contact">
+        <img class="avatar-image" src={avatar4} />
         <h3>Myles Bennett</h3>
-        <p>christine13@gmail.com</p>
-        <a href="www.linkedin.com/in/christine-lee-">Visit my LinkedIn profile!</a>
+        <p>myles.bennett@hotmail.com</p>
+        <a href="https://www.linkedin.com/in/myles-bennett/">Visit my LinkedIn profile!</a>
       </div>
 
       </div>
-      <footer>
-      <ul className="footer-list">
-      <li>Created by:</li>
-      <li>Christine Lee</li>
-      <li>Farjana Nipa</li>
-      <li>Anton Moiseev</li>
-      <li>Myles Bennett</li>
-      </ul>
-      <p>©Bitmaker 2019</p></footer>
+      <footer>©Bitmaker 2019</footer>
       </div>
     );
   }
