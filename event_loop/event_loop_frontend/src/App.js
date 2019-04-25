@@ -66,10 +66,15 @@ class Home extends React.Component {
 
   render () {
     return (
+
       <div class="body-background">
+
         <div className="grid-container">
         <EventsList updateMap={this.updateEventsOnMap} />
-        <EventsMapView events={this.state.events} />
+        <EventsMapView
+          events={this.state.events}
+          zoom={14} 
+        />
         </div>
         <h2>Filter Events based on your Interests</h2>
         <Autosuggest />
