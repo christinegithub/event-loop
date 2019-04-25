@@ -98,7 +98,7 @@ class Example extends React.Component {
           <button className="suggest-button" onClick={this.handleClick}>Submit</button>
         </div>
 
-        <ul>
+        <ul className="suggestion-list">
         {this.state.events.map(event => (
 
           <li class="each-event">
