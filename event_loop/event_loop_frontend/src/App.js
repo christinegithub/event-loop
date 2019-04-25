@@ -4,13 +4,17 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import EventsMapView from './EventsMapView';
 import EventsList from './EventsList';
 import EventDetails from './EventDetails';
-import Autosuggest from './AutocompleteKeywords'
+import Autosuggest from './AutocompleteKeywords';
+
+import logo from './img/EventLoopLogo.png';
+import avatar1 from './img/christine.png';
 
 function App() {
   return (
     <Router>
-      <div>
-        <ul className="navbar">
+      <img class="logo" src={logo} alt="Logo"/>
+      <div >
+        <ul>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -36,7 +40,10 @@ class About extends React.Component {
   render () {
     return (
       <div>
-        <h2>About</h2>
+        <h2>The team</h2>
+        <img class="avatar" src={avatar1} />
+
+        <h3>Contact Us</h3>
       </div>
     );
   }
@@ -69,8 +76,9 @@ class Home extends React.Component {
 
   render () {
     return (
-      <div>
-        <h2>Events</h2>
+
+      <div class="body-background">
+
         <div className="grid-container">
         <EventsList updateMap={this.updateEventsOnMap} />
         <EventsMapView
