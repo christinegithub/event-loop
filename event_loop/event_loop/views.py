@@ -110,7 +110,7 @@ def home_page(request):
             defaults = {
                 'title': event_full["title"],
                 'description': event_full["description_stripped"],
-                'image_url': event_full["image_url"] + "?width=600&height=600",
+                'image_url': event_full["image_url"] + "?width=1920&height=1080",
                 'start_time': event_summary["start_time"],
                 'end_time': event_summary["end_time"],
                 'venue_name': event_full["venue_name"],

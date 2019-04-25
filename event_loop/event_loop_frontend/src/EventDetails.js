@@ -5,8 +5,14 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import CardHeader from '@material-ui/core/CardHeader';
 import EventsMapView from './EventsMapView';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
-
+const styles = theme => ({
+  card: {
+    width: '50%',
+  },
+});
 
 class EventDetails extends React.Component {
   constructor(props) {
@@ -60,64 +66,62 @@ class EventDetails extends React.Component {
   render() {
     console.log(this.state.event);
     console.log(this.state.eventLocations);
+    const { classes } = this.props;
+
     const EventRender = (props) => {
-    return(
-        <div>
-            { props.id ? (
+      return(
+          <div>
+              { props.id ? (
+                <Grid container justify="center" style={{ backgroundColor: '#f7f7f7' }}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      component="img"
+                      style={{background: 'cover'}}
+                      image={props.image_url}
+                    />
+                       <CardContent>
+                         <Typography variant="title" color="textPrimary">
+                           <b>{props.title}</b>
+                         </Typography>
 
-              <Card style={{width: '50%', 'padding-left': '25%' }}>
+                         <Typography variant="subtitle1" color="primary">
+                           <b>Date</b> : {props.date}
+                         </Typography>
 
-                <CardMedia
-                  component="img"
-                  height="360"     // as an example I am modifying width and height
-                  width="640"
-                  style={{background: 'cover'}}
+                         <Typography variant="subtitle1" color="primary">
+                           <b>Start Time</b> : {props.start_time}
+                         </Typography>
 
-                  image={props.image_url}
-                />
-                   <CardContent>
-                     <Typography variant="title" color="textPrimary">
+                         <Typography variant="subtitle1" color="primary">
+                           <b>End Time: </b>{props.end_time}
+                         </Typography>
 
-                       <b>{props.title}</b>
+                         <Typography variant="subtitle1" color="textPrimary">
+                           <b>Address</b>: {props.address + "," + props.city}
+                         </Typography>
 
-                     </Typography>
+                         <Typography variant="subtitle1" color="textPrimary">
+                           <b>Venue :</b> {props.venue}
+                         </Typography>
 
-                     <Typography variant="subtitle1" color="primary">
-                       <b>Date</b> : {props.date}
-                     </Typography>
+                          <Typography component="p" color="textPrimary">
 
-                     <Typography variant="subtitle1" color="primary">
-                       <b>Start Time</b> : {props.start_time}
-                     </Typography>
+                            <b>Description</b>: <i>{props.description}</i>
+                          </Typography>
 
-                     <Typography variant="subtitle1" color="primary">
-                       <b>End Time: </b>{props.end_time}
-                     </Typography>
-
-                     <Typography variant="subtitle1" color="textPrimary">
-                       <b>Address</b>: {props.address + "," + props.city}
-                     </Typography>
-
-                     <Typography variant="subtitle1" color="textPrimary">
-                       <b>Venue :</b> {props.venue}
-                     </Typography>
-
-                      <Typography component="p" color="textPrimary">
-
-                        <b>Description</b>: <i>{props.description}</i>
-                      </Typography>
-
-                    </CardContent>
-                    <EventsMapView events={[this.state.event]} />
-
-
-                </Card>
-            ) : null}
-        </div>
-    )
-}
+                        </CardContent>
+                        <EventsMapView
+                          events={[this.state.event]}
+                          zoom={10}
+                        />
+                    </Card>
+                  </Grid>
+              ) : null}
+          </div>
+      )
+    }
     return EventRender(this.state.event);
   }
 }
 
-export default EventDetails;
+export default withStyles(styles)(EventDetails);
